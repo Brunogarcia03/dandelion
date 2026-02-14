@@ -5,7 +5,6 @@ import tailwindcss from "@tailwindcss/vite";
 
 import react from "@astrojs/react";
 import markdoc from "@astrojs/markdoc";
-import keystatic from "@keystatic/astro";
 
 import vercel from "@astrojs/vercel";
 
@@ -16,6 +15,6 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
-  integrations: [react(), markdoc(), keystatic()],
+  integrations: [react(), markdoc()],
   adapter: vercel(),
 });
