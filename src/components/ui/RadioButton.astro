@@ -1,0 +1,178 @@
+---
+const STREAM = "https://server6.hostradios.com/8022/stream";
+
+import {
+  Play,
+  Pause,
+  LoaderCircle,
+  Volume2,
+  VolumeX,
+  ChevronUp,
+  ChevronDown,
+} from "@lucide/astro";
+
+import Logo from "@/assets/images/LOGO.jpg";
+---
+
+<aside
+  id="radio-player"
+  class="fixed bottom-0 left-0 w-full bg-[#0a0a0a] border-t max-w-screen border-white/10 px-6 py-4 flex items-center justify-between transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] translate-y-full z-100"
+>
+  <!-- LEFT -->
+  <div class="flex items-center">
+    <!-- THUMB -->
+    <div
+      class="hidden md:block
+      w-14 h-14 rounded-full
+      border-2 border-[#00c195]
+      overflow-hidden mr-4"
+    >
+      <img src={Logo.src} alt="Radio Logo" class="w-full h-full object-cover" />
+    </div>
+
+    <!-- PLAY -->
+    <button
+      id="radio-play"
+      class="relative cursor-pointer w-14 h-14 rounded-full bg-[#00c195] text-black flex items-center justify-center mr-4 hover:scale-105 transition animate-pulse"
+    >
+      <span class="icon-play absolute inset-0 flex items-center justify-center">
+        <Play />
+      </span>
+
+      <span
+        class="icon-loading absolute inset-0 hidden items-center justify-center"
+      >
+        <LoaderCircle class="animate-spin" />
+      </span>
+
+      <span
+        class="icon-pause absolute inset-0 flex items-center justify-center"
+      >
+        <Pause />
+      </span>
+    </button>
+
+    <!-- DATA -->
+    <div>
+      <h2 class="text-white text-lg font-semibold flex items-center">
+        Dándelion
+        <span class="mx-2 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+        Aire
+      </h2>
+
+      <p class="text-xs text-white/60">Radio FM 98.5 - Alberti</p>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="flex items-center gap-4">
+    <button id="radio-mute" class="text-[#00c195]">
+      <span class="icon-vol"><Volume2 /></span>
+      <span class="icon-mute hidden"><VolumeX /></span>
+    </button>
+
+    <input
+      id="radio-volume"
+      type="range"
+      min="0"
+      max="1"
+      step="0.01"
+      value="1"
+      class="w-40 accent-[#00c195] hidden md:block"
+    />
+  </div>
+
+  <!-- CHEVRON INSIDE -->
+  <button
+    id="radio-toggle"
+    class="absolute cursor-pointer right-4 -top-14 w-12 h-12 rounded-full bg-[#00c195] text-black flex items-center justify-center shadow-xl hover:scale-105 transition"
+  >
+    <span class="icon-up">
+      <ChevronUp />
+    </span>
+
+    <span class="icon-down hidden">
+      <ChevronDown />
+    </span>
+  </button>
+</aside>
+
+<audio id="radio-audio" src={STREAM} preload="none"></audio>
+
+<script is:inline>
+  const audio = document.getElementById("radio-audio");
+
+  const playBtn = document.getElementById("radio-play");
+  const muteBtn = document.getElementById("radio-mute");
+  const volumeSlider = document.getElementById("radio-volume");
+
+  const toggleBtn = document.getElementById("radio-toggle");
+  const player = document.getElementById("radio-player");
+
+  const playIcon = playBtn.querySelector(".icon-play");
+  const loadingIcon = playBtn.querySelector(".icon-loading");
+  const pauseIcon = playBtn.querySelector(".icon-pause");
+  pauseIcon.classList.add("hidden");
+
+  const volIcon = muteBtn.querySelector(".icon-vol");
+  const muteIcon = muteBtn.querySelector(".icon-mute");
+
+  const chevUp = toggleBtn.querySelector(".icon-up");
+  const chevDown = toggleBtn.querySelector(".icon-down");
+
+  let playing = false;
+  let collapsed = true;
+
+  /* PLAY */
+  playBtn.addEventListener("click", async () => {
+    loadingIcon.classList.remove("hidden");
+    loadingIcon.classList.add("flex");
+    pauseIcon.classList.add("hidden");
+    playIcon.classList.add("hidden");
+
+    try {
+      if (!playing) {
+        await audio.play();
+        playing = true;
+        loadingIcon.classList.remove("flex");
+        loadingIcon.classList.add("hidden");
+        playIcon.classList.add("hidden");
+        pauseIcon.classList.remove("hidden");
+        playBtn.classList.remove("animate-pulse");
+      } else {
+        audio.pause();
+        playing = false;
+        loadingIcon.classList.remove("flex");
+        loadingIcon.classList.add("hidden");
+        playIcon.classList.remove("hidden");
+        pauseIcon.classList.add("hidden");
+        playBtn.classList.add("animate-pulse");
+      }
+    } catch (err) {
+      console.log("User interaction required");
+    }
+  });
+
+  /* VOLUME */
+  volumeSlider.addEventListener("input", () => {
+    audio.volume = volumeSlider.valueAsNumber;
+  });
+
+  /* MUTE */
+  muteBtn.addEventListener("click", () => {
+    audio.muted = !audio.muted;
+
+    volIcon.classList.toggle("hidden", audio.muted);
+    muteIcon.classList.toggle("hidden", !audio.muted);
+  });
+
+  /* COLLAPSE */
+  toggleBtn.addEventListener("click", () => {
+    collapsed = !collapsed;
+
+    player.style.transform = collapsed ? "translateY(0%)" : "translateY(-100%)";
+
+    chevUp.classList.toggle("hidden", !collapsed);
+    chevDown.classList.toggle("hidden", collapsed);
+  });
+</script>

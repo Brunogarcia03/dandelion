@@ -1,0 +1,203 @@
+---
+import { Menu, Sparkles, X } from "@lucide/astro";
+import Button from "./ui/Button.astro";
+---
+
+<header
+  class="absolute flex items-center justify-between top-0 pt-5 px-[5vw] h-20 w-full"
+>
+  <a
+    href="/"
+    class="flex flex-col font-bold text-2xl sm:text-4xl text-white z-1000"
+  >
+    <span> Dándelion </span>
+    <span class="font-medium text-neutral-300 text-base sm:text-lg">
+      FM 98.5 - Alberti
+    </span>
+  </a>
+  <nav
+    class="fixed left-1/2 -translate-x-1/2 backdrop-blur-md bg-opacity-15 bg-[#00c195] border border-[#fefefe]/40 hidden md:flex items-center justify-center gap-1 lg:gap-3 px-3 lg:px-5 py-1 rounded-full z-999"
+  >
+    <a
+      href="/"
+      class="group relative inline-flex h-8 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 font-medium text-neutral-100 duration-500"
+      ><div
+        class="translate-y-0 transition duration-300 group-hover:-translate-y-[150%]"
+      >
+        Inicio
+      </div><div
+        class="absolute translate-y-[150%] duration-300 transition group-hover:translate-y-0"
+      >
+        Inicio
+      </div></a
+    >
+    <a
+      href="/videos"
+      class="group relative inline-flex h-8 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 font-medium text-neutral-100 duration-500"
+      ><div
+        class="translate-y-0 transition duration-300 group-hover:-translate-y-[150%]"
+      >
+        Videos
+      </div><div
+        class="absolute translate-y-[150%] duration-300 transition group-hover:translate-y-0"
+      >
+        Videos
+      </div></a
+    >
+    <a
+      href="/videos"
+      class="group relative inline-flex h-8 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 font-medium text-neutral-100 duration-500"
+      ><div
+        class="translate-y-0 transition duration-300 group-hover:-translate-y-[150%]"
+      >
+        Noticias
+      </div><div
+        class="absolute translate-y-[150%] duration-300 transition group-hover:translate-y-0"
+      >
+        Noticias
+      </div></a
+    >
+    <a
+      href="/videos"
+      class="group relative inline-flex h-8 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 font-medium text-neutral-100 duration-500"
+      ><div
+        class="translate-y-0 transition duration-300 group-hover:-translate-y-[150%]"
+      >
+        Contacto
+      </div><div
+        class="absolute translate-y-[150%] duration-300 transition group-hover:translate-y-0"
+      >
+        Contacto
+      </div></a
+    >
+  </nav>
+
+  <div class="flex items-center gap-x-3">
+    <Button
+      class="group/button hidden sm:flex items-center z-999 justify-center h-11 lg:w-52 bg-[#00c195] px-6 font-medium text-white transition-all duration-300"
+      spanClass="flex items-center gap-x-2"
+    >
+      <Sparkles class="block md:hidden lg:block" />
+      Apoyanos
+    </Button>
+
+    <button
+      id="button-menu"
+      class="relative md:hidden z-1000 flex items-center justify-center h-11 w-11 backdrop-blur-md bg-[#00c195]/15 border border-[#fefefe] text-white rounded-lg"
+    >
+      <Menu class="icon-menu w-5 h-5" />
+
+      <X
+        class="icon-close absolute w-5 h-5 left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 opacity-0"
+      />
+    </button>
+  </div>
+
+  <div
+    id="menu-overlay"
+    class="fixed inset-0 flex flex-col justify-between bg-[#00353d] px-5 pt-28 pb-10 w-screen h-screen overflow-hidden z-999"
+    style="clip-path: inset(0 0 0 100%)"
+  >
+    <nav
+      id="mobile-menu"
+      class="bg-[#00353d] flex flex-col font-semibold gap-4 text-white text-3xl z-50 mt-20"
+    >
+      <a href="/">Inicio</a>
+      <a href="/videos">Videos</a>
+      <a href="/noticias">Noticias</a>
+      <a href="/contacto">Contacto</a>
+    </nav>
+    <Button
+      id="apoyanos"
+      class="group/button flex items-center justify-center rounded-lg lg:w-52 bg-[#00c195] px-6 py-2 font-medium text-white"
+      spanClass="flex items-center gap-x-2 z-50"
+    >
+      <Sparkles class="block md:hidden lg:block" />
+      Apoyanos
+    </Button>
+  </div>
+</header>
+
+<script>
+  import { gsap } from "gsap";
+
+  function initMenu() {
+    const button = document.getElementById("button-menu");
+    const menu = document.getElementById("mobile-menu");
+    const overlay = document.getElementById("menu-overlay");
+
+    if (!button || !menu || !overlay) return;
+
+    const iconMenu = button.querySelector(".icon-menu");
+    const iconClose = button.querySelector(".icon-close");
+    const apoyanos = overlay.querySelector("#apoyanos");
+    const links = overlay.querySelectorAll("#mobile-menu a");
+
+    let open = false;
+    let scrollPos = 0;
+
+    const tl = gsap.timeline({
+      paused: true,
+      defaults: {
+        ease: "power3.out",
+        duration: 0.6,
+      },
+
+      onStart: () => {
+        scrollPos = window.scrollY;
+
+        document.body.style.position = "fixed";
+        document.body.style.top = `-${scrollPos}px`;
+      },
+
+      onReverseComplete: () => {
+        document.body.style.position = "";
+        document.body.style.top = "";
+
+        window.scrollTo(0, scrollPos);
+        open = false;
+      },
+    });
+
+    gsap.set(overlay, { clipPath: "inset(0 0 0 100%)" });
+    gsap.set(apoyanos, { opacity: 0 });
+    gsap.set(links, { y: 40, opacity: 0 });
+
+    tl.to(overlay, {
+      clipPath: "inset(0 0 0 0%)",
+    })
+      .to(apoyanos, {
+        opacity: 1,
+        duration: 0.4,
+      })
+      .to(
+        links,
+        {
+          y: 0,
+          opacity: 1,
+          stagger: 0.05,
+          duration: 0.4,
+        },
+        "<",
+      );
+
+    button.addEventListener("click", () => {
+      open = !open;
+
+      gsap.to(iconMenu, {
+        opacity: open ? 0 : 1,
+        rotate: open ? -90 : 0,
+        duration: 0.3,
+      });
+
+      gsap.to(iconClose, {
+        opacity: open ? 1 : 0,
+        rotate: open ? 0 : 90,
+        duration: 0.3,
+      });
+      open ? tl.play() : tl.reverse();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initMenu);
+</script>

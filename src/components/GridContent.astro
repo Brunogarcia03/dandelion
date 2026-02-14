@@ -1,0 +1,329 @@
+---
+import instagram from "@/assets/svgs/instagram-icon.svg";
+import twitter from "@/assets/svgs/x.svg";
+import facebook from "@/assets/svgs/facebook-icon.svg";
+import tiktok from "@/assets/svgs/tiktok-icon-light.svg";
+import spotify from "@/assets/svgs/spotify.svg";
+
+const redes = [
+  {
+    name: "Instagram",
+    slug: "instagram",
+    url: "https://www.instagram.com/dandelionfm991/",
+    icon: instagram,
+    color: "red",
+  },
+  {
+    name: "Twitter",
+    slug: "twitter",
+    icon: twitter,
+    url: "https://x.com/Vorterix",
+    color: "blue",
+  },
+  {
+    name: "Facebook",
+    slug: "facebook",
+    icon: facebook,
+    url: "https://www.facebook.com/dandelionfm991/",
+    color: "blue-dark",
+  },
+  {
+    name: "TikTok",
+    slug: "tiktok",
+    icon: tiktok,
+    url: "https://www.tiktok.com/@vorterixcom",
+    color: "black",
+  },
+  {
+    name: "Spotify",
+    slug: "spotify",
+    icon: spotify,
+    url: "https://open.spotify.com/show/7802345678901234",
+    color: "green",
+  },
+];
+
+const colorClasses: any = {
+  red: "border-red-500 group-hover:bg-red-500",
+  blue: "border-blue-500 group-hover:bg-blue-500",
+  "blue-dark": "border-blue-700 group-hover:bg-blue-700 group-hover:text-white",
+  black: "border-black group-hover:bg-black group-hover:text-white",
+  green: "border-black group-hover:bg-green-700 group-hover:text-white",
+};
+---
+
+<section
+  class="w-full min-h-screen bg-white py-16 flex flex-col items-center justify-center"
+>
+  <h5
+    class="text-[#00c195] mb-2 md:mb-4 text-lg md:text-xl font-bold uppercase undefined"
+  >
+    Videos y noticias
+  </h5>
+  <h3 class="text-2xl md:text-5xl max-w-xl text-center font-semibold undefined">
+    Mirá nuestro contenido
+  </h3>
+  <div
+    class="grid grid-cols-1 md:grid-cols-3 mt-8 gap-5 max-w-6xl px-5 mx-auto w-full grid-rows-[415px_auto] md:auto-rows-[20rem]"
+  >
+    {/* Video principal */}
+    <div
+      class="group/bento shadow-input flex flex-col justify-between space-y-4 rounded-xl border border-black/50 bg-black/10 p-4 transition duration-200 hover:shadow-xl [&>p:text-lg] card overflow-hidden md:col-span-2 md:row-span-[415px]"
+    >
+      <iframe
+        width="560"
+        height="315"
+        src="https://www.youtube.com/embed/xZACQmDZb6Q?si=aTZwlukmyJGeN5Px"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        referrerpolicy="strict-origin-when-cross-origin"
+        allowfullscreen=""
+        class="w-full rounded-lg"></iframe>
+      <div class="transition duration-200 group-hover/bento:translate-x-2">
+        <div class="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="tabler-icon tabler-icon-video h-4 w-4 text-neutral-500"
+            ><path
+              d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z"
+            ></path><path
+              d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"
+            ></path></svg
+          ><h5 class="font-sans font-bold text-neutral-600 mt-2 mb-2">
+            Dándelion 98.5 FM
+          </h5>
+        </div><p class="font-sans text-xs font-normal text-neutral-600">
+          <span class="text-sm"
+            >Dándelion es una estación de radio argentina, que transmite desde
+            la Ciudad de Alberti hacia gran parte del país a través de sus
+            estaciones y repetidoras.</span
+          >
+        </p>
+      </div>
+    </div>
+
+    {/* Estadísticas */}
+    <div
+      class="group/bento md:col-start-3 flex flex-col justify-between space-y-4 rounded-xl border border-black/50 bg-black/10 p-4 transition duration-200 hover:shadow-xl [&>p:text-lg] card overflow-hidden md:col-span-1 md:row-span-[20em]"
+    >
+      <div
+        class="flex flex-col items-center justify-center h-full text-4xl md:text-5xl lg:text-6xl italic font-black z-10"
+      >
+        <h5 class="text-[#00c195] mb-1 text-xl font-bold uppercase">
+          Suscriptores
+        </h5><span class="text-4xl">40,000</span><div
+          class="flex flex-wrap items-center justify-center gap-x-3 mt-6"
+        >
+          <div class="flex flex-col items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="tabler-icon tabler-icon-video"
+              ><path
+                d="M15 10l4.553 -2.276a1 1 0 0 1 1.447 .894v6.764a1 1 0 0 1 -1.447 .894l-4.553 -2.276v-4z"
+              ></path><path
+                d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"
+              ></path></svg
+            ><span class="text-sm font-bold">Videos subidos</span><span
+              class="text-2xl"><span>300</span></span
+            >
+          </div><div class="flex flex-col items-center justify-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="tabler-icon tabler-icon-eye"
+              ><path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0"></path><path
+                d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"
+              ></path></svg
+            ><span class="text-sm font-bold">Vistas</span><span class="text-2xl"
+              ><span>1,000,000</span></span
+            >
+          </div>
+        </div>
+      </div>
+      <div class="transition duration-200 group-hover/bento:translate-x-2">
+        <div class="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="tabler-icon tabler-icon-device-desktop-analytics h-4 w-4 text-neutral-500"
+            ><path
+              d="M3 4m0 1a1 1 0 0 1 1 -1h16a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-16a1 1 0 0 1 -1 -1z"
+            ></path><path d="M7 20h10"></path><path d="M9 16v4"></path><path
+              d="M15 16v4"></path><path d="M9 12v-4"></path><path d="M12 12v-1"
+            ></path><path d="M15 12v-2"></path><path d="M12 12v-1"></path></svg
+          ><h5 class="font-sans font-bold text-neutral-600 mt-2 mb-2">
+            Estadísticas del canal
+          </h5>
+        </div><p class="font-sans text-xs font-normal text-neutral-600">
+          <span class="text-sm">Métricas en tiempo real de Youtube</span>
+        </p>
+      </div>
+    </div>
+
+    {/* Últimas tres noticias */}
+    {
+      ["noticia 1", "noticia 2", "noticia 3"].map((noticia, index) => (
+        <div class="group/bento shadow-input row-span-1 flex flex-col justify-between space-y-4 rounded-xl border border-black/50 bg-black/10 p-4 transition duration-200 hover:shadow-xl [&>p:text-lg] card overflow-hidden md:col-span-1">
+          <div class="min-h-[35vh] md:min-h-[20vh] w-full">
+            <div
+              class="flex flex-1 w-full h-full min-h-24 rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
+              style="background: linear-gradient(-45deg, rgb(0, 193, 149), rgb(13, 196, 154), rgb(0, 53, 61)) 99.9991% 50% / 400% 400%;"
+            >
+              <div class="h-full w-full rounded-lg" />
+            </div>
+          </div>
+          <div class="transition duration-200 group-hover/bento:translate-x-2">
+            <div class="flex items-center gap-2">
+              <h5 class="font-sans font-bold text-neutral-600 mt-2 mb-2">
+                {noticia}
+              </h5>
+            </div>
+            <p class="font-sans text-xs font-normal text-neutral-600">
+              <a class="text-sm" href="https://youtu.be/xZACQmDZb6Q">
+                Felipe Pigna: José de San Martín | Los Libros de la Buena
+                Memoria
+              </a>
+            </p>
+          </div>
+        </div>
+      ))
+    }
+
+    {/* Redes */}
+    <div
+      class="group/bento shadow-input row-span-1 flex flex-col justify-between space-y-4 rounded-xl border border-black/50 bg-black/10 p-4 transition duration-200 hover:shadow-xl [&>p:text-lg] card overflow-hidden md:col-span-3"
+    >
+      <div
+        id="redes"
+        class="flex flex-1 w-full h-full sm:min-h-40 dark:bg-dot-white/[0.2] bg-dot-black/[0.2] flex-row gap-x-2"
+      >
+        {
+          redes.map((red, i) => (
+            <a
+              href={red.url}
+              target="_blank"
+              class="group flex h-full will-change-transform w-1/5 rounded-2xl border border-black/50 bg-black/10 flex-col items-center justify-center p-2 $"
+            >
+              <img src={red.icon.src} class="w-5 sm:w-8 md:w-12" />
+
+              <p
+                class={`hidden sm:block border text-xs rounded-full px-2 py-0.5 mt-2 sm:mt-4 transition-all duration-300 ${colorClasses[red.color]} z-10`}
+              >
+                {red.name}
+              </p>
+            </a>
+          ))
+        }
+      </div>
+
+      <div class="transition duration-200 group-hover/bento:translate-x-2">
+        <div class="flex items-center gap-2">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="tabler-icon tabler-icon-brand-wechat h-4 w-4 text-neutral-500"
+            ><path
+              d="M16.5 10c3.038 0 5.5 2.015 5.5 4.5c0 1.397 -.778 2.645 -2 3.47l0 2.03l-1.964 -1.178a6.649 6.649 0 0 1 -1.536 .178c-3.038 0 -5.5 -2.015 -5.5 -4.5s2.462 -4.5 5.5 -4.5z"
+            ></path><path
+              d="M11.197 15.698c-.69 .196 -1.43 .302 -2.197 .302a8.008 8.008 0 0 1 -2.612 -.432l-2.388 1.432v-2.801c-1.237 -1.082 -2 -2.564 -2 -4.199c0 -3.314 3.134 -6 7 -6c3.782 0 6.863 2.57 7 5.785l0 .233"
+            ></path><path d="M10 8h.01"></path><path d="M7 8h.01"></path><path
+              d="M15 14h.01"></path><path d="M18 14h.01"></path></svg
+          ><h5 class="font-sans font-bold text-neutral-600 mt-2 mb-2">
+            Nuestras redes sociales
+          </h5>
+        </div><p class="font-sans text-xs font-normal text-neutral-600">
+          <span class="text-sm"
+            >Síguenos en nuestras redes sociales y podrás ver todas nuestras
+            novedades.</span
+          >
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import { gsap } from "gsap";
+
+  function initGrid() {
+    const container = document.querySelector("#redes");
+    const items = gsap.utils.toArray("#redes a");
+
+    if (!container || !items.length) return;
+
+    const isDesktop = window.matchMedia("(min-width: 768px)");
+
+    const variants = [
+      { x: 50, rotation: -20 },
+      { x: 25, rotation: -10 },
+      { x: 0, rotation: 0 },
+      { x: -25, rotation: 10 },
+      { x: -50, rotation: 20 },
+    ];
+
+    if (isDesktop.matches) {
+      items.forEach((el: any, i) => {
+        gsap.set(el, variants[i]);
+      });
+    }
+
+    const tl = gsap.timeline({ paused: true });
+
+    tl.to(items, {
+      x: 0,
+      rotation: 0,
+      duration: 0.6,
+      ease: "expo.out",
+      stagger: 0.05,
+    });
+
+    container.addEventListener("mouseenter", () => {
+      if (!isDesktop.matches) return;
+      tl.play();
+    });
+
+    container.addEventListener("mouseleave", () => {
+      if (!isDesktop.matches) return;
+      tl.reverse();
+    });
+  }
+
+  document.addEventListener("DOMContentLoaded", initGrid);
+</script>

@@ -1,0 +1,105 @@
+---
+import Logo from "@/assets/images/LOGO.jpg";
+
+import instagram from "@/assets/svgs/instagram-icon.svg";
+import twitter from "@/assets/svgs/x.svg";
+import facebook from "@/assets/svgs/facebook-icon.svg";
+import tiktok from "@/assets/svgs/tiktok-icon-light.svg";
+import spotify from "@/assets/svgs/spotify.svg";
+
+const redes = [
+  {
+    name: "Instagram",
+    slug: "instagram",
+    url: "https://www.instagram.com/dandelionfm991/",
+    icon: instagram,
+  },
+  {
+    name: "Twitter",
+    slug: "twitter",
+    url: "https://x.com/Vorterix",
+    icon: twitter,
+  },
+  {
+    name: "Facebook",
+    slug: "facebook",
+    url: "https://www.facebook.com/dandelionfm991/",
+    icon: facebook,
+  },
+  {
+    name: "TikTok",
+    slug: "tiktok",
+    url: "https://www.tiktok.com/@vorterixcom",
+    icon: tiktok,
+  },
+  {
+    name: "Spotify",
+    slug: "spotify",
+    url: "https://open.spotify.com/show/7802345678901234",
+    icon: spotify,
+  },
+];
+---
+
+<footer class="text-gray-600 body-font">
+  <div
+    class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col"
+  >
+    <div class="flex items-center justify-between w-full sm:w-auto">
+      <!-- Logo -->
+      <div class="flex items-center gap-x-2 sm:border-r sm:pr-4">
+        <img
+          class="rounded-full size-10 md:size-12"
+          src={Logo.src}
+          alt="Logo Dándelion"
+        />
+        <a
+          href="/"
+          class="flex flex-col font-bold text-xl sm:text-3xl text-neutral-900"
+        >
+          <span> Dándelion </span>
+          <span class="font-medium text-neutral-600 text-sm sm:text-base">
+            FM 98.5 - Alberti
+          </span>
+        </a>
+      </div>
+
+      <!-- Copyright -->
+      <div class="flex flex-col">
+        <p class="text-sm text-neutral-500 sm:pl-4">
+          © {new Date().getFullYear()} Dandelion FM
+        </p>
+        <a
+          class="text-[.6rem] sm:text-[.8rem] text-end w-full"
+          href="https://brunog.com.ar/"
+          >Hecho por <span
+            class="text-[#00c195] relative after:absolute after:bottom-0 after:left-0 after:h-px after:w-full after:origin-bottom-right md:after:scale-x-0 after:bg-[#00c195] after:transition-transform after:duration-300 after:ease-[cubic-bezier(0.65_0.05_0.36_1)] hover:after:origin-bottom-left hover:after:scale-x-100"
+            >Bruno G.</span
+          ></a
+        >
+      </div>
+    </div>
+
+    <!-- Redes dinámicas -->
+    <div class="flex gap-4 sm:ml-auto sm:mt-0 mt-4">
+      {
+        redes.map((red) => (
+          <a
+            href={red.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={red.name}
+            class="opacity-80 hover:opacity-100 transition"
+          >
+            <img
+              src={red.icon.src}
+              alt={red.name}
+              class="w-5 h-5"
+              loading="lazy"
+            />
+          </a>
+        ))
+      }
+    </div>
+  </div>
+</footer>

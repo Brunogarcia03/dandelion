@@ -1,0 +1,73 @@
+---
+import Image from "astro/components/Image.astro";
+import Button from "./ui/Button.astro";
+
+import { Sparkles } from "@lucide/astro";
+
+import Logo from "@/assets/images/LOGO.jpg";
+import BlobGreen from "@/assets/svgs/blob-green.svg";
+import BlobGreen_tl from "@/assets/svgs/blob-green-tl.svg";
+---
+
+<section class="relative w-full h-svh pt-20 bg-[#00353d] overflow-hidden">
+  <Image
+    alt="Fondo Blureado Top Left"
+    src={BlobGreen_tl}
+    width={900}
+    height={800}
+    class="absolute w-[90%] h-[90%] left-0 blur-3xl z-0 pointer-events-none select-none"
+  />
+  <div class="overflow-clip absolute bottom-0 right-0 pointer-events-none">
+    <Image
+      alt="Fondo Blureado Bottom Right"
+      src={BlobGreen}
+      width={900}
+      height={800}
+      class="w-full h-full blur-3xl select-none z-0"
+    />
+  </div>
+
+  <article class="grid max-w-7xl mx-auto h-full place-content-center">
+    <div class="flex items-center justify-center mb-3 z-10 rounded-full">
+      <Image
+        src={Logo}
+        alt="Logo Dándelion"
+        class="rounded-full border border-white w-52 h-52 md:w-64 md:h-64"
+        width={300}
+        height={300}
+      />
+    </div>
+
+    <h1
+      class="relative z-10 mx-auto max-w-2xl text-center text-pretty backdrop-blur-sm px-[3vh] font-bold text-white text-2xl md:text-3xl lg:text-4xl"
+    >
+      Donde el sonido se convierte en magia.
+    </h1>
+    <p
+      class="relative z-10 mx-auto px-[3vh] text-pretty sm:max-w-xl mt-2 md:mt-4 text-center text-base lg:text-lg font-normal text-white"
+    >
+      Música, historias y emociones en cada frecuencia. Sintoniza Radio
+      Dándelion y deja que el sonido te lleve más allá.
+    </p>
+    <div
+      class="relative z-10 mt-5 flex flex-wrap items-center justify-center gap-4"
+    >
+      <a href={"/apoyanos"}>
+        <Button
+          class="group/button transform rounded-lg md:w-60 bg-[#00c195] px-4 sm:px-6 py-2 font-medium text-white transition-all duration-300"
+          spanClass="flex items-center gap-x-2"
+        >
+          <Sparkles class="w-5 h-5" />
+          Apoyanos
+        </Button>
+      </a>
+      <a href={"/contacto"}>
+        <Button
+          class="group/button md:w-60 transform rounded-lg border border-black/50 bg-black/10 px-6 py-2 font-medium text-white transition-all duration-300"
+        >
+          Contacto
+        </Button>
+      </a>
+    </div>
+  </article>
+</section>

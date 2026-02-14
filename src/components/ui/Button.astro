@@ -1,0 +1,28 @@
+---
+import { twMerge } from "tailwind-merge";
+
+const { id, class: className, spanClass } = Astro.props;
+---
+
+<button
+  id={id}
+  class={twMerge(
+    "group relative inline-flex h-12 cursor-pointer items-center justify-center overflow-hidden rounded-md bg-neutral-950 px-6 font-medium text-neutral-200 duration-500",
+    className,
+  )}
+  ><div
+    class={twMerge(
+      "translate-y-0 transition duration-200 group-hover:-translate-y-[150%]",
+      spanClass,
+    )}
+  >
+    <slot />
+  </div><div
+    class={twMerge(
+      "absolute translate-y-[150%] duration-200 transition group-hover:translate-y-0",
+      spanClass,
+    )}
+  >
+    <slot />
+  </div></button
+>

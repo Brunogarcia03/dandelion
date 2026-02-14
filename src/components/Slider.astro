@@ -1,0 +1,97 @@
+---
+import { StarIcon } from "@lucide/astro";
+
+const logos = [
+  "FM/AM",
+  "Podcast",
+  "Frecuencia",
+  "Locución",
+  "Streaming",
+  "Sintonía",
+  "Dial",
+  "Transmisión",
+  "Modulación",
+  "Antena",
+];
+---
+
+<section
+  class="relative flex items-center py-4 my-4 max-w-screen overflow-hidden"
+>
+  <div
+    class="absolute -left-5 top-1/2 -translate-y-1/2 w-[120%] h-16 md:h-20 rotate-1 bg-[#00c195]"
+  >
+  </div>
+
+  <div class="bg-[#00353d] -ml-5 w-[120%] py-2 -rotate-1 backdrop-blur-sm">
+    <div class="marquee overflow-hidden whitespace-nowrap">
+      <!-- duplicamos contenido -->
+      <div
+        class="marquee-track flex items-center text-white text-xl sm:text-2xl md:text-3xl font-bold tracking-tight"
+      >
+        {
+          logos.concat(logos).map((logo) => (
+            <div class="flex items-center gap-2 mx-6 select-none">
+              <StarIcon class="w-6 h-6" />
+              <p>{logo}</p>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  import gsap from "gsap";
+
+  const track = document.querySelector(".marquee-track") as HTMLElement;
+
+  const BASE_SPEED = 18;
+  const SCROLL_MULTIPLIER = 0.12;
+  const SMOOTHING = 0.05;
+  const MAX_SCROLL_BOOST = 50;
+
+  let direction = 1;
+  let x = 0;
+
+  let scrollVelocity = 0;
+  let smoothVelocity = 0;
+
+  let lastScrollY = window.scrollY;
+  let lastTime = performance.now();
+
+  window.addEventListener("scroll", () => {
+    const now = performance.now();
+    const dt = now - lastTime;
+
+    const dy = window.scrollY - lastScrollY;
+
+    scrollVelocity = (dy / dt) * 100;
+
+    if (scrollVelocity > 0) direction = -1; // scroll down → derecha→izquierda
+    if (scrollVelocity < 0) direction = 1; // scroll up → izquierda→derecha
+
+    lastScrollY = window.scrollY;
+    lastTime = now;
+  });
+
+  const wrap = gsap.utils.wrap(-50, 0);
+
+  gsap.ticker.add((time, delta) => {
+    smoothVelocity += (scrollVelocity - smoothVelocity) * SMOOTHING;
+
+    const scrollBoost = gsap.utils.clamp(
+      -MAX_SCROLL_BOOST,
+      MAX_SCROLL_BOOST,
+      smoothVelocity * SCROLL_MULTIPLIER,
+    );
+
+    let move = direction * BASE_SPEED * (delta / 1000);
+    move += scrollBoost * (delta / 1000);
+
+    x += move;
+
+    track.style.transform = `translateX(${wrap(x)}%)`;
+  });
+</script>
