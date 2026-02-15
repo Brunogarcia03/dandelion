@@ -1,15 +1,18 @@
 ---
+import { getCollection } from "astro:content";
+
 import Layout from "@/layouts/Layout.astro";
 import blob from "@/assets/images/blob.svg";
 
-const news = [
-  "noticia 1",
-  "noticia 2",
-  "noticia 3",
-  "noticia 4",
-  "noticia 5",
-  "noticia 6",
-];
+const noticias = await getCollection("noticias");
+const news = noticias
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .map((art) => ({
+    slug: art.slug,
+    title: art.data.title,
+    subtitulo: art.data.subtitulo,
+    imagen: art.data.imagen,
+  }));
 ---
 
 <Layout theme="light">
@@ -42,7 +45,7 @@ const news = [
                 alt={n + " falsa"}
                 class="aspect-video object-cover bg-red-300 rounded-lg"
               />
-              <h3 class="capitalize font-bold">{n}</h3>
+              <h3 class="capitalize font-bold">{n.title}</h3>
             </a>
           ))
         }
