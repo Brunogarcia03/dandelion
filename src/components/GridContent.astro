@@ -4,6 +4,7 @@ import twitter from "@/assets/svgs/x.svg";
 import facebook from "@/assets/svgs/facebook-icon.svg";
 import tiktok from "@/assets/svgs/tiktok-icon-light.svg";
 import spotify from "@/assets/svgs/spotify.svg";
+import { getCollection } from "astro:content";
 
 const redes = [
   {
@@ -50,6 +51,17 @@ const colorClasses: any = {
   black: "border-black group-hover:bg-black group-hover:text-white",
   green: "border-black group-hover:bg-green-700 group-hover:text-white",
 };
+
+const noticias = await getCollection("noticias");
+const news = noticias
+  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  .slice(0, 3)
+  .map((art) => ({
+    slug: art.slug,
+    title: art.data.title,
+    subtitulo: art.data.subtitulo,
+    imagen: art.data.imagen,
+  }));
 ---
 
 <section
@@ -192,30 +204,34 @@ const colorClasses: any = {
 
     {/* Últimas tres noticias */}
     {
-      ["noticia 1", "noticia 2", "noticia 3"].map((noticia, index) => (
-        <div class="group/bento shadow-input row-span-1 flex flex-col justify-between space-y-4 rounded-xl border border-black/50 bg-black/10 p-4 transition duration-200 hover:shadow-xl [&>p:text-lg] card overflow-hidden md:col-span-1">
+      news.map((noticia) => (
+        <a
+          href={`noticias/${noticia.slug}`}
+          class="group/bento shadow-input row-span-1 flex flex-col justify-between space-y-4 rounded-xl border border-black/50 bg-black/10 p-4 transition duration-200 hover:shadow-xl [&>p:text-lg] card overflow-hidden md:col-span-1"
+        >
           <div class="min-h-[35vh] md:min-h-[20vh] w-full">
             <div
               class="flex flex-1 w-full h-full min-h-24 rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
               style="background: linear-gradient(-45deg, rgb(0, 193, 149), rgb(13, 196, 154), rgb(0, 53, 61)) 99.9991% 50% / 400% 400%;"
             >
-              <div class="h-full w-full rounded-lg" />
+              <img
+                src={noticia.imagen}
+                alt={noticia.title}
+                class="aspect-video object-cover bg-red-300 rounded-lg"
+              />
             </div>
           </div>
           <div class="transition duration-200 group-hover/bento:translate-x-2">
             <div class="flex items-center gap-2">
               <h5 class="font-sans font-bold text-neutral-600 mt-2 mb-2">
-                {noticia}
+                {noticia.title}
               </h5>
             </div>
             <p class="font-sans text-xs font-normal text-neutral-600">
-              <a class="text-sm" href="https://youtu.be/xZACQmDZb6Q">
-                Felipe Pigna: José de San Martín | Los Libros de la Buena
-                Memoria
-              </a>
+              {noticia.subtitulo}
             </p>
           </div>
-        </div>
+        </a>
       ))
     }
 
