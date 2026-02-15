@@ -15,7 +15,7 @@ import BlobGreen_tl from "@/assets/svgs/blob-green-tl.svg";
     src={BlobGreen_tl}
     width={900}
     height={800}
-    class="absolute w-[90%] h-[90%] left-0 blur-3xl z-0 pointer-events-none select-none"
+    class="blob-tl absolute w-[90%] h-[90%] left-0 blur-3xl z-0 pointer-events-none select-none"
   />
   <div class="overflow-clip absolute bottom-0 right-0 pointer-events-none">
     <Image
@@ -23,45 +23,48 @@ import BlobGreen_tl from "@/assets/svgs/blob-green-tl.svg";
       src={BlobGreen}
       width={900}
       height={800}
-      class="w-full h-full blur-3xl select-none z-0"
+      class="blob-br w-full h-full blur-3xl select-none z-0"
     />
   </div>
 
   <article class="grid max-w-7xl mx-auto h-full place-content-center">
-    <div class="flex items-center justify-center mb-3 z-10 rounded-full">
+    <div
+      class="hero-logo flex items-center justify-center mb-3 z-10 rounded-full"
+    >
       <Image
         src={Logo}
         alt="Logo Dándelion"
-        class="rounded-full border border-white w-52 h-52 md:w-64 md:h-64"
+        class="rounded-full border border-white w-52 h-52 md:w-64 md:h-64 lg:w-72 lg:h-72"
         width={300}
         height={300}
       />
     </div>
 
     <h1
-      class="relative z-10 mx-auto max-w-2xl text-center text-pretty backdrop-blur-sm px-[3vh] font-bold text-white text-2xl md:text-3xl lg:text-4xl"
+      class="hero-title relative z-10 mx-auto max-w-2xl text-center text-pretty backdrop-blur-sm px-[3vh] font-bold text-white text-2xl md:text-3xl lg:text-4xl"
     >
       Donde el sonido se convierte en magia.
     </h1>
     <p
-      class="relative z-10 mx-auto px-[3vh] text-pretty sm:max-w-xl mt-2 md:mt-4 text-center text-base lg:text-lg font-normal text-white"
+      class="hero-description relative z-10 mx-auto px-[3vh] text-pretty sm:max-w-xl mt-2 md:mt-4 text-center text-base lg:text-lg font-normal text-white"
     >
       Música, historias y emociones en cada frecuencia. Sintoniza Radio
       Dándelion y deja que el sonido te lleve más allá.
     </p>
     <div
-      class="relative z-10 mt-5 flex flex-wrap items-center justify-center gap-4"
+      class="hero-buttons relative z-10 mt-5 flex flex-wrap items-center justify-center gap-4"
     >
-      <a href={"/apoyanos"}>
+      <div class="button-item">
         <Button
+          href="/apoyanos"
           class="group/button transform rounded-lg md:w-60 bg-[#00c195] px-4 sm:px-6 py-2 font-medium text-white transition-all duration-300"
           spanClass="flex items-center gap-x-2"
         >
           <Sparkles class="w-5 h-5" />
           Apoyanos
         </Button>
-      </a>
-      <a href={"/contacto"}>
+      </div>
+      <a href={"/contacto"} class="button-item">
         <Button
           class="group/button md:w-60 transform rounded-lg border border-black/50 bg-black/10 px-6 py-2 font-medium text-white transition-all duration-300"
         >
@@ -71,3 +74,101 @@ import BlobGreen_tl from "@/assets/svgs/blob-green-tl.svg";
     </div>
   </article>
 </section>
+
+<script>
+  import gsap from "gsap";
+
+  document.addEventListener("DOMContentLoaded", () => {
+    // Timeline principal
+    const tl = gsap.timeline({ defaults: { ease: "power2.out" } });
+
+    // Animación de los blobs (fondos)
+    gsap.to(".blob-tl", {
+      x: 50,
+      y: 50,
+      scale: 1.1,
+      duration: 8,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+
+    gsap.to(".blob-br", {
+      x: -50,
+      y: -50,
+      scale: 1.15,
+      duration: 10,
+      repeat: -1,
+      yoyo: true,
+      ease: "sine.inOut",
+    });
+
+    // Animación de entrada del logo
+    tl.from(".hero-logo", {
+      opacity: 0,
+      y: 30,
+      filter: "blur(8px)",
+      duration: 1,
+      ease: "back.out(1.7)",
+    });
+
+    // Animación del título (palabra por palabra)
+    const title = document.querySelector(".hero-title");
+    if (title) {
+      const words = title.textContent?.trim().split(" ") || [];
+      title.innerHTML = words
+        .map((word) => `<span class="word">${word}</span>`)
+        .join(" ");
+
+      tl.from(
+        ".hero-title .word",
+        {
+          opacity: 0,
+          y: 30,
+          filter: "blur(8px)",
+          duration: 0.5,
+          stagger: 0.1,
+          ease: "power2.out",
+        },
+        "-=0.3",
+      );
+    }
+
+    // Animación de la descripción
+    tl.from(
+      ".hero-description",
+      {
+        opacity: 0,
+        y: 30,
+        filter: "blur(4px)",
+        duration: 0.8,
+      },
+      "-=0.3",
+    );
+
+    // Animación de los botones
+    tl.from(
+      ".button-item",
+      {
+        opacity: 0,
+        y: 30,
+        scale: 0.9,
+        duration: 0.6,
+        stagger: 0.15,
+        ease: "back.out(1.7)",
+      },
+      "-=0.4",
+    );
+  });
+</script>
+
+<style>
+  .word {
+    display: inline-block;
+    margin-right: 0.25em;
+  }
+
+  .button-item {
+    display: inline-block;
+  }
+</style>

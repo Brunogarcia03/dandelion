@@ -1,0 +1,37 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Image from "astro/components/Image.astro";
+
+import BlobGreen_tl from "@/assets/svgs/blob-green-tl.svg";
+import FormContact from "@/components/FormContact.astro";
+---
+
+<Layout>
+  <section
+    class="relative w-full min-h-svh pt-20 bg-[#00353d] overflow-hidden flex items-center justify-center"
+  >
+    <Image
+      alt="Fondo Blureado Top Left"
+      src={BlobGreen_tl}
+      width={900}
+      height={800}
+      class="blob-tl absolute w-[90%] h-[90%] left-0 blur-3xl z-0 pointer-events-none select-none"
+    />
+    <div class="grid place-items-center w-full">
+      <h1
+        class="relative z-10 mx-auto max-w-4xl text-center text-xl font-bold text-white md:text-3xl lg:text-4xl"
+      >
+        Contáctanos
+      </h1>
+      <p
+        class="relative z-10 mx-auto max-w-lg pt-5 px-5 text-center text-base lg:text-lg font-normal text-white"
+      >
+        Utilizamos un enfoque ágil para probar suposiciones y conectarnos con
+        las necesidades de su audiencia de manera temprana y frecuente.
+      </p>
+      <div class="z-40 max-w-3xl w-full px-1">
+        <FormContact />
+      </div>
+    </div>
+  </section>
+</Layout>

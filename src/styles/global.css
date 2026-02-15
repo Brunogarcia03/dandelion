@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+.price-btn {
+  @apply border border-white/40 bg-white/10 rounded-lg p-4 text-center transition hover:bg-white/20;
+}

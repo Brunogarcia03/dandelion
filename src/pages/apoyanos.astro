@@ -1,0 +1,370 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import FAQ from "@/components/F&Q.astro";
+import ButtonOffer from "@/components/ui/ButtonOffer.astro";
+import Button from "@/components/ui/Button.astro";
+
+import { Banknote, Calendar, DollarSign, QrCode } from "@lucide/astro";
+
+const tabs = [
+  {
+    icon: Banknote,
+    label: "Mensual",
+    id: "mensual",
+    prices: [6000, 8000, 12000, 18000, 24000, 30000],
+    annual: false,
+  },
+  {
+    icon: Calendar,
+    label: "Anual",
+    id: "anual",
+    prices: [6000, 8000, 12000, 18000, 24000, 30000],
+    annual: true,
+  },
+  {
+    icon: DollarSign,
+    label: "Por única vez",
+    id: "unica-vez",
+    prices: [],
+    annual: false,
+  },
+];
+---
+
+<Layout>
+  <section
+    class="relative w-full min-h-svh pt-20 bg-[#00353d] overflow-hidden flex items-center justify-center"
+  >
+    <div
+      class="grid grid-cols-1 lg:grid-cols-2 place-items-center gap-5 md:gap-10 md:max-w-5xl mx-auto"
+    >
+      <div class="p-8">
+        <h5
+          class="text-center w-full text-[#00c195] mb-4 text-xl font-bold uppercase animate-text"
+        >
+          ¡Asociate a Dándelion!
+        </h5>
+        <h1
+          class="relative z-10 mx-auto max-w-4xl text-center text-xl w-full font-bold text-white md:text-3xl lg:text-4xl animate-text"
+        >
+          ¿Por qué asociarse a Dándelion?
+        </h1>
+
+        <p
+          class="relative z-10 mx-auto max-w-lg pt-5 text-base lg:text-lg font-normal text-white animate-text"
+        >
+          Este 2025 en Gelatina nos la jugamos con un tremendo estudio nuevo y
+          una programación de contenidos a la altura de nuestra Comunidad.
+        </p>
+
+        <p
+          class="relative z-10 mx-auto max-w-lg pt-5 text-base lg:text-lg font-normal text-white animate-text"
+        >
+          Necesitamos 10 mil socios nuevos para consolidar este crecimiento.
+        </p>
+
+        <p
+          class="relative z-10 mx-auto max-w-lg pt-5 text-base lg:text-lg font-normal text-white animate-text"
+        >
+          Nos da orgullo ser un medio independiente bancado por sus socios y por
+          eso te invitamos a ser parte.
+        </p>
+      </div>
+
+      {/* Botones de pago */}
+      <div class="text-center w-full md:max-w-120">
+        <div
+          class="w-full h-full pt-5 rounded-xl flex flex-col overflow-hidden"
+        >
+          <nav class="p-1 rounded-t-xl">
+            <ul class="flex w-full text-sm font-medium px-5">
+              {
+                tabs.map((item, index) => (
+                  <li
+                    class="tab-button flex-1 p-3 text-xl cursor-pointer flex items-center justify-center rounded-t-lg relative transition duration-200 text-nowrap text-white"
+                    data-tab={item.id}
+                    data-index={index}
+                  >
+                    <item.icon class="md:w-5 md:h-5" />
+                    <p class="hidden sm:block ml-1 md:ml-2">{item.label}</p>
+                    {index === 0 && (
+                      <div
+                        id="underline"
+                        class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#00c195]"
+                      />
+                    )}
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+
+          <div
+            class="flex flex-col text-white flex-1 items-center justify-center pb-10 px-5 md:px-10 pt-5 relative overflow-hidden"
+          >
+            {/* Tab Mensual */}
+            <div class="tab-content" data-content="mensual">
+              <ul
+                class="grid grid-cols-2 gap-5 place-content-center w-full pb-5"
+              >
+                {
+                  tabs[0].prices.map((price, index) => (
+                    <li class="animate-item" data-index={index}>
+                      <ButtonOffer Annual={false} price={price} />
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+
+            {/* Tab Anual */}
+            <div
+              class="tab-content opacity-0 hidden pointer-events-none"
+              data-content="anual"
+            >
+              <div class="flex flex-col items-center h-full justify-center">
+                <h3
+                  class="text-center mb-5 text-2xl font-semibold animate-item"
+                  data-index="0"
+                >
+                  50% de descuento!
+                </h3>
+                <ul
+                  class="grid grid-cols-2 gap-5 place-content-center w-full pb-5"
+                >
+                  {
+                    tabs[1].prices.map((price, index) => (
+                      <li class="animate-item" data-index={index + 1}>
+                        <ButtonOffer annual={true} price={price} />
+                      </li>
+                    ))
+                  }
+                </ul>
+              </div>
+            </div>
+
+            {/* Tab Por única vez */}
+            <div
+              class="tab-content opacity-0 hidden pointer-events-none"
+              data-content="unica-vez"
+            >
+              <div class="flex flex-col items-center justify-center h-full">
+                <h3 class="text-3xl text-center animate-item" data-index="0">
+                  <span class="font-bold text-4xl">Escaneá y pagá</span>
+                  <br />
+                  desde tu celular
+                </h3>
+                <div class="animate-item" data-index="1">
+                  <QrCode class="size-48 mt-4" />
+                </div>
+              </div>
+            </div>
+
+            {/* Footer común */}
+            <a
+              href={"#"}
+              class="mt-4 border-t border-white w-full animate-text"
+            >
+              <p class="mt-4 text-center">
+                Si estás <b>fuera de Argentina</b>
+              </p>
+              <Button
+                class="group/button border border-black/50 bg-black/10 mt-2 px-10 py-2 text-xl w-full"
+                spanClass="flex gap-x-2 items-center justify-center"
+              >
+                <span class="my-auto">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="7.056000232696533 3 37.35095977783203 45"
+                    width="1em"
+                    height="1em"
+                  >
+                    <g xmlns="http://www.w3.org/2000/svg" clip-path="url(#a)">
+                      <path
+                        fill="#002991"
+                        d="M38.914 13.35c0 5.574-5.144 12.15-12.927 12.15H18.49l-.368 2.322L16.373 39H7.056l5.605-36h15.095c5.083 0 9.082 2.833 10.555 6.77a9.687 9.687 0 0 1 .603 3.58z"
+                      ></path>
+                      <path
+                        fill="#60CDFF"
+                        d="M44.284 23.7A12.894 12.894 0 0 1 31.53 34.5h-5.206L24.157 48H14.89l1.483-9 1.75-11.178.367-2.322h7.497c7.773 0 12.927-6.576 12.927-12.15 3.825 1.974 6.055 5.963 5.37 10.35z"
+                      ></path>
+                      <path
+                        fill="#008CFF"
+                        d="M38.914 13.35C37.31 12.511 35.365 12 33.248 12h-12.64L18.49 25.5h7.497c7.773 0 12.927-6.576 12.927-12.15z"
+                      ></path>
+                    </g>
+                  </svg>
+                </span>
+                PayPal
+              </Button>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <FAQ />
+</Layout>
+
+<script>
+  import gsap from "gsap";
+
+  // Esperar a que el DOM esté listo
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const tabContents = document.querySelectorAll(".tab-content");
+    const underline = document.getElementById("underline");
+    const animateTexts = document.querySelectorAll(".animate-text");
+
+    let currentTab = 0;
+
+    // Animación inicial de textos
+    gsap.from(animateTexts, {
+      opacity: 0,
+      y: 20,
+      filter: "blur(4px)",
+      duration: 0.6,
+      stagger: 0.15,
+      ease: "power2.out",
+    });
+
+    // Animación inicial de los tabs
+    gsap.from(tabButtons, {
+      opacity: 0,
+      y: -10,
+      duration: 0.3,
+      delay: 0.8,
+      stagger: 0.1,
+      ease: "power2.out",
+    });
+
+    // Animación inicial del contenido del primer tab
+    const firstTabItems = tabContents[0].querySelectorAll(".animate-item");
+    gsap.from(firstTabItems, {
+      opacity: 0,
+      y: 20,
+      scale: 0.95,
+      duration: 0.4,
+      delay: 1.2,
+      stagger: 0.08,
+      ease: "back.out(1.7)",
+    });
+
+    tabButtons.forEach((button: any, index: number) => {
+      button.addEventListener("click", () => {
+        if (currentTab === index) return;
+
+        const tabId = button.getAttribute("data-tab");
+
+        // Animar el underline
+        gsap.to(underline, {
+          x: button.offsetLeft - tabButtons[0].offsetLeft,
+          width: button.offsetWidth,
+          duration: 0.3,
+          ease: "power2.out",
+        });
+
+        // Animar el background de los botones
+        tabButtons.forEach((btn, i) => {
+          if (i === index) {
+            gsap.to(btn, {
+              backgroundColor: "#eeeeee",
+              color: "#000000",
+              duration: 0.2,
+            });
+          } else {
+            gsap.to(btn, {
+              backgroundColor: "transparent",
+              color: "#ffffff",
+              duration: 0.2,
+            });
+          }
+        });
+
+        // Animar el contenido
+        const currentContent = tabContents[currentTab];
+        const nextContent = tabContents[index];
+        const currentItems = currentContent.querySelectorAll(".animate-item");
+        const nextItems = nextContent.querySelectorAll(".animate-item");
+
+        const timeline = gsap.timeline();
+
+        // Salida del contenido actual con stagger
+        timeline.to(currentItems, {
+          opacity: 0,
+          y: -15,
+          scale: 0.95,
+          duration: 0.15,
+          stagger: 0.03,
+          ease: "power2.in",
+        });
+
+        timeline.to(
+          currentContent,
+          {
+            opacity: 0,
+            duration: 0.1,
+            onComplete: () => {
+              currentContent.style.pointerEvents = "none";
+              currentContent.classList.add("hidden");
+            },
+          },
+          "-=0.1",
+        );
+
+        // Entrada del nuevo contenido con stagger
+        timeline.fromTo(
+          nextContent,
+          {
+            opacity: 0,
+          },
+          {
+            opacity: 1,
+            duration: 0.1,
+            onStart: () => {
+              nextContent.style.pointerEvents = "auto";
+              nextContent.classList.remove("hidden");
+            },
+          },
+        );
+
+        timeline.fromTo(
+          nextItems,
+          {
+            opacity: 0,
+            y: 20,
+            scale: 0.95,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            scale: 1,
+            duration: 0.4,
+            stagger: 0.08,
+            ease: "back.out(1.7)",
+          },
+          "-=0.05",
+        );
+
+        currentTab = index;
+      });
+    });
+  });
+</script>
+
+<style>
+  .tab-button {
+    transition:
+      background-color 0.2s,
+      color 0.2s;
+  }
+
+  .tab-button:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .tab-button:first-child {
+    background-color: #eeeeee;
+    color: #000000;
+  }
+</style>

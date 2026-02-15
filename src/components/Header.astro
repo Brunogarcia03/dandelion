@@ -1,6 +1,8 @@
 ---
 import { Menu, Sparkles, X } from "@lucide/astro";
 import Button from "./ui/Button.astro";
+
+const { theme } = Astro.props;
 ---
 
 <header
@@ -8,10 +10,12 @@ import Button from "./ui/Button.astro";
 >
   <a
     href="/"
-    class="flex flex-col font-bold text-2xl sm:text-4xl text-white z-1000"
+    class={`flex flex-col font-bold text-2xl md:text-3xl lg:text-4xl ${theme === "light" ? "text-black" : "text-white"}`}
   >
     <span> Dándelion </span>
-    <span class="font-medium text-neutral-300 text-base sm:text-lg">
+    <span
+      class={`font-medium text-sm md:text-base lg:text-lg ${theme === "light" ? "text-neutral-700" : "text-neutral-300"}`}
+    >
       FM 98.5 - Alberti
     </span>
   </a>
@@ -45,7 +49,7 @@ import Button from "./ui/Button.astro";
       </div></a
     >
     <a
-      href="/videos"
+      href="/noticias"
       class="group relative inline-flex h-8 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 font-medium text-neutral-100 duration-500"
       ><div
         class="translate-y-0 transition duration-300 group-hover:-translate-y-[150%]"
@@ -58,7 +62,7 @@ import Button from "./ui/Button.astro";
       </div></a
     >
     <a
-      href="/videos"
+      href="/contacto"
       class="group relative inline-flex h-8 cursor-pointer items-center justify-center overflow-hidden rounded-md px-3 font-medium text-neutral-100 duration-500"
       ><div
         class="translate-y-0 transition duration-300 group-hover:-translate-y-[150%]"
@@ -74,6 +78,7 @@ import Button from "./ui/Button.astro";
 
   <div class="flex items-center gap-x-3">
     <Button
+      href="/apoyanos"
       class="group/button hidden sm:flex items-center z-999 justify-center h-11 lg:w-52 bg-[#00c195] px-6 font-medium text-white transition-all duration-300"
       spanClass="flex items-center gap-x-2"
     >
@@ -83,7 +88,7 @@ import Button from "./ui/Button.astro";
 
     <button
       id="button-menu"
-      class="relative md:hidden z-1000 flex items-center justify-center h-11 w-11 backdrop-blur-md bg-[#00c195]/15 border border-[#fefefe] text-white rounded-lg"
+      class={`relative md:hidden z-1000 flex items-center justify-center h-11 w-11 backdrop-blur-md border rounded-lg ${theme === "light" ? "bg-[#00c195]/75 border-[#333] text-black" : "bg-[#00c195]/15 border-[#fefefe] text-white"}`}
     >
       <Menu class="icon-menu w-5 h-5" />
 
@@ -100,7 +105,7 @@ import Button from "./ui/Button.astro";
   >
     <nav
       id="mobile-menu"
-      class="bg-[#00353d] flex flex-col font-semibold gap-4 text-white text-3xl z-50 mt-20"
+      class="bg-[#00353d] flex flex-col font-semibold uppercase tracking-wide gap-4 text-white text-3xl z-50 mt-20"
     >
       <a href="/">Inicio</a>
       <a href="/videos">Videos</a>
@@ -109,8 +114,9 @@ import Button from "./ui/Button.astro";
     </nav>
     <Button
       id="apoyanos"
-      class="group/button flex items-center justify-center rounded-lg lg:w-52 bg-[#00c195] px-6 py-2 font-medium text-white"
-      spanClass="flex items-center gap-x-2 z-50"
+      href="/apoyanos"
+      class="group/button flex items-center justify-center rounded-lg h-12 lg:w-52 bg-[#00c195] px-6 py-2 font-medium text-white transition-all duration-300"
+      spanClass="flex items-center gap-x-2"
     >
       <Sparkles class="block md:hidden lg:block" />
       Apoyanos

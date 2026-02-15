@@ -1,0 +1,52 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import blob from "@/assets/images/blob.svg";
+
+const news = [
+  "noticia 1",
+  "noticia 2",
+  "noticia 3",
+  "noticia 4",
+  "noticia 5",
+  "noticia 6",
+];
+---
+
+<Layout theme="light">
+  <section
+    class="relative w-full pt-20 overflow-hidden flex items-center justify-center"
+  >
+    <div class="grid place-items-center w-full py-20">
+      <h1
+        class="relative z-10 mx-auto max-w-4xl text-center text-xl font-bold text-black md:text-3xl lg:text-4xl"
+      >
+        Noticias
+      </h1>
+      <p
+        class="relative z-10 mx-auto max-w-xl pt-5 px-5 text-center text-base lg:text-lg font-normal text-black"
+      >
+        Utilizamos un enfoque ágil para probar suposiciones y conectarnos con
+        las necesidades de su audiencia de manera temprana y frecuente.
+      </p>
+      <div
+        class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full max-w-7xl mt-10 px-[5vh]"
+      >
+        {
+          news.map((n) => (
+            <a
+              href="/noticias/slug"
+              class="flex flex-col justify-between space-y-4 rounded-xl border border-black/50 bg-black/10 p-4 transition duration-200 hover:shadow-xl [&>p:text-lg] card overflow-hidden cursor-pointer"
+            >
+              <img
+                src={blob.src}
+                alt={n + " falsa"}
+                class="aspect-video object-cover bg-red-300 rounded-lg"
+              />
+              <h3 class="capitalize font-bold">{n}</h3>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Layout>

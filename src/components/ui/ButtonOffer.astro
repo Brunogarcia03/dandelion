@@ -1,0 +1,14 @@
+---
+const { price, annual } = Astro.props;
+---
+
+<a href={"#"}>
+  <button
+    class="transition-all duration-300 hover:scale-105 hover:rotate-2 sm:flex md:flex-col items-center gap-x-1 border border-white/50 bg-white/10 px-5 md:px-10 py-2 rounded-lg text-center"
+  >
+    <p class="text-xl font-semibold">
+      ${Intl.NumberFormat().format(price)}
+    </p>
+    <span class="">{annual ? "Por año" : "Por mes"}</span>
+  </button>
+</a>

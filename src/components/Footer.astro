@@ -43,7 +43,7 @@ const redes = [
 
 <footer class="text-gray-600 body-font">
   <div
-    class="container px-5 py-8 mx-auto flex items-center sm:flex-row flex-col"
+    class="container px-5 py-8 mx-auto flex items-center flex-col-reverse sm:flex-row gap-5"
   >
     <div class="flex items-center justify-between w-full sm:w-auto">
       <!-- Logo -->
@@ -81,7 +81,7 @@ const redes = [
     </div>
 
     <!-- Redes dinámicas -->
-    <div class="flex gap-4 sm:ml-auto sm:mt-0 mt-4">
+    <div class="flex gap-4 sm:ml-auto">
       {
         redes.map((red) => (
           <a
@@ -89,7 +89,7 @@ const redes = [
             target="_blank"
             rel="noopener noreferrer"
             aria-label={red.name}
-            class="opacity-80 hover:opacity-100 transition"
+            class="sm:opacity-80 hover:opacity-100 transition"
           >
             <img
               src={red.icon.src}
