@@ -9,7 +9,34 @@ export default config({
     },
   },
 
+  singletons: {
+    youtubeChannel: {
+      label: "YouTube Channel Stats",
+      path: "src/content/youtubeChannel/*",
+      schema: {
+        views: fields.integer({ label: "Views" }),
+        subs: fields.integer({ label: "Subs" }),
+        videos: fields.integer({ label: "Videos" }),
+      },
+    },
+  },
+
   collections: {
+    videos: collection({
+      label: "Videos",
+      slugField: "title",
+      path: "src/content/videos/*",
+
+      schema: {
+        title: fields.slug({
+          name: {
+            label: "Título",
+          },
+        }),
+        videoId: fields.text({ label: "Video ID" }),
+        views: fields.integer({ label: "Vistas" }),
+      },
+    }),
     noticias: collection({
       label: "Noticias",
       slugField: "title",

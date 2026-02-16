@@ -1,0 +1,16 @@
+name: Update YouTube Stats
+
+on:
+  schedule:
+    - cron: "0 3 * * 1" # lunes 03:00 UTC
+  workflow_dispatch:
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Call Astro endpoint
+        run: |
+          curl -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
+          https://tusitio.com/api/update-youtube

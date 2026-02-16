@@ -52,6 +52,8 @@ const colorClasses: any = {
   green: "border-black group-hover:bg-green-700 group-hover:text-white",
 };
 
+const videoID = "QXAcnnVMOk8";
+
 const noticias = await getCollection("noticias");
 const news = noticias
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -85,7 +87,7 @@ const news = noticias
       <iframe
         width="560"
         height="315"
-        src="https://www.youtube.com/embed/xZACQmDZb6Q?si=aTZwlukmyJGeN5Px"
+        src={`https://www.youtube.com/embed/${videoID}?si=xCBJdlJF7CegvYnf`}
         title="YouTube video player"
         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
         referrerpolicy="strict-origin-when-cross-origin"

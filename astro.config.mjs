@@ -9,6 +9,8 @@ import keystatic from "@keystatic/astro";
 
 import vercel from "@astrojs/vercel";
 
+import node from "@astrojs/node";
+
 // https://astro.build/config
 export default defineConfig({
   output: "server",
@@ -17,5 +19,7 @@ export default defineConfig({
   },
 
   integrations: [react(), markdoc(), keystatic()],
-  adapter: vercel(),
+  adapter: node({
+    mode: "standalone",
+  }),
 });
