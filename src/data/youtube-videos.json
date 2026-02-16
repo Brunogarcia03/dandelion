@@ -1,0 +1,14 @@
+{
+  "updatedAt": "2026-02-16T18:00:00Z",
+  "videos": [
+    {
+      "id": "abc123",
+      "title": "Mi video",
+      "thumbnail": "https://...",
+      "publishedAt": "2025-01-01T00:00:00Z",
+      "views": 100,
+      "likes": 10,
+      "comments": 2
+    }
+  ]
+}
