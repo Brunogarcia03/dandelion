@@ -1,8 +1,8 @@
-name: Update YouTube Stats
+name: Update YouTube Videos
 
 on:
   schedule:
-    - cron: "0 3 * * 1" # lunes 03:00 UTC
+    - cron: "0 3 */3 * *" # cada 3 dias a las 03:00 UTC
   workflow_dispatch:
 
 jobs:
@@ -13,4 +13,4 @@ jobs:
       - name: Call Astro endpoint
         run: |
           curl -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}" \
-          https://dandelion-rho.vercel.app/api/update-youtube
+          https://dandelion-rho.vercel.app/api/update-youtube-videos
