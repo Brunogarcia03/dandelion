@@ -36,7 +36,7 @@ async function commitFile(contentObj: any) {
   });
 }
 
-export const POST: APIRoute = async ({ request }) => {
+export const GET: APIRoute = async ({ request }) => {
   if (
     request.headers.get("authorization") !==
     `Bearer ${import.meta.env.CRON_SECRET}`
