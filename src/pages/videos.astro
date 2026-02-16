@@ -1,17 +1,7 @@
 ---
-import { getCollection } from "astro:content";
-
 import Layout from "@/layouts/Layout.astro";
 
-const noticias = await getCollection("noticias");
-const news = noticias
-  .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
-  .map((art) => ({
-    slug: art.slug,
-    title: art.data.title,
-    subtitulo: art.data.subtitulo,
-    imagen: art.data.imagen,
-  }));
+import { videos } from "@/data/youtube-videos.json";
 ---
 
 <Layout theme="light">
@@ -34,27 +24,31 @@ const news = noticias
         class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full max-w-7xl mt-10 px-[5vh]"
       >
         {
-          news.map((n) => (
-            <a
-              href={`noticias/${n.slug}`}
-              class="group/bento flex flex-col rounded-xl border border-black/50 bg-black/10 p-4 transition duration-200 hover:shadow-xl [&>p:text-lg] card overflow-hidden cursor-pointer"
-            >
-              <img
-                src={n.imagen}
-                alt={n.title}
-                class="aspect-video object-cover bg-red-300 rounded-lg"
+          videos.map((v) => (
+            <div class="group/bento shadow-input flex flex-col justify-between space-y-2 rounded-xl border border-black/50 bg-black/10 p-4 transition duration-200 hover:shadow-xl [&>p:text-lg] card overflow-hidden">
+              <iframe
+                width="460"
+                height="215"
+                src={`https://www.youtube.com/embed/${v.id}?si=xCBJdlJF7CegvYnf`}
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                referrerpolicy="strict-origin-when-cross-origin"
+                allowfullscreen=""
+                class="w-full rounded-lg aspect-video"
               />
               <div class="transition duration-200 group-hover/bento:translate-x-2">
-                <div class="flex items-center gap-2">
-                  <h5 class="font-sans font-bold text-neutral-600 mt-2 mb-2 text-nowrap truncate">
-                    {n.title}
-                  </h5>
-                </div>
-                <p class="font-sans text-xs font-normal text-neutral-600">
-                  <span class="text-sm">{n.subtitulo}</span>
-                </p>
+                <>
+                  <div class="flex items-center gap-2">
+                    <h5 class="font-sans font-bold text-neutral-600 mt-2 mb-2">
+                      {v.title}
+                    </h5>
+                  </div>
+                  <p class="font-sans text-sm font-normal text-neutral-600">
+                    vistas: {v.views} - likes: {v.likes}
+                  </p>
+                </>
               </div>
-            </a>
+            </div>
           ))
         }
       </div>

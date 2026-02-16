@@ -54,6 +54,8 @@ const colorClasses: any = {
 
 const videoID = "QXAcnnVMOk8";
 
+import stats from "@/data/youtube-stats.json";
+
 const noticias = await getCollection("noticias");
 const news = noticias
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
@@ -133,7 +135,7 @@ const news = noticias
       >
         <h5 class="text-[#00c195] mb-1 text-xl font-bold uppercase">
           Suscriptores
-        </h5><span class="text-4xl">40,000</span><div
+        </h5><span class="text-4xl">{stats.subs}</span><div
           class="flex flex-wrap items-center justify-center gap-x-3 mt-6"
         >
           <div class="flex flex-col items-center justify-center">
@@ -154,7 +156,7 @@ const news = noticias
                 d="M3 6m0 2a2 2 0 0 1 2 -2h8a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-8a2 2 0 0 1 -2 -2z"
               ></path></svg
             ><span class="text-sm font-bold">Videos subidos</span><span
-              class="text-2xl"><span>300</span></span
+              class="text-2xl"><span>{stats.videos}</span></span
             >
           </div><div class="flex flex-col items-center justify-center">
             <svg
@@ -172,7 +174,7 @@ const news = noticias
                 d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6"
               ></path></svg
             ><span class="text-sm font-bold">Vistas</span><span class="text-2xl"
-              ><span>1,000,000</span></span
+              ><span>{stats.views}</span></span
             >
           </div>
         </div>
