@@ -12,7 +12,7 @@ export default config({
   singletons: {
     youtubeChannel: {
       label: "YouTube Channel Stats",
-      path: "src/content/youtubeChannel",
+      path: "src/content/youtubeChannel.json",
       schema: {
         views: fields.integer({ label: "Views" }),
         subs: fields.integer({ label: "Subs" }),

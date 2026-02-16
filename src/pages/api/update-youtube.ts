@@ -3,24 +3,43 @@ import type { APIRoute } from "astro";
 async function commitStats(stats: any) {
   const GITHUB_TOKEN = import.meta.env.GITHUB_TOKEN;
 
+  const path = "src/content/youtubeChannel.json";
+
+  const repoUrl =
+    "https://api.github.com/repos/Brunogarcia03/dandelion/contents/" + path;
+
+  let sha: string | undefined = undefined;
+
+  // Intentar obtener SHA si el archivo existe
+  const currentFile = await fetch(repoUrl, {
+    headers: {
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+      Accept: "application/vnd.github+json",
+    },
+  });
+
+  if (currentFile.ok) {
+    const currentJson = await currentFile.json();
+    sha = currentJson.sha;
+  }
+
   const content = Buffer.from(JSON.stringify(stats, null, 2)).toString(
     "base64",
   );
 
-  await fetch(
-    "https://api.github.com/repos/Brunogarcia03/dandelion/contents/src/content/stats/youtube.json",
-    {
-      method: "PUT",
-      headers: {
-        Authorization: `Bearer ${GITHUB_TOKEN}`,
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        message: "update youtube stats",
-        content,
-      }),
+  await fetch(repoUrl, {
+    method: "PUT",
+    headers: {
+      Authorization: `Bearer ${GITHUB_TOKEN}`,
+      "Content-Type": "application/json",
+      Accept: "application/vnd.github+json",
     },
-  );
+    body: JSON.stringify({
+      message: "update youtube stats",
+      content,
+      sha, // si existe → update | si no → create
+    }),
+  });
 }
 
 export const POST: APIRoute = async ({ request }) => {
