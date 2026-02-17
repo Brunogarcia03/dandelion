@@ -21,7 +21,7 @@ const { notice } = Astro.props;
 const { Content } = await notice.render();
 ---
 
-<Layout>
+<Layout canonical={`https://dandelion-rho.vercel.app/noticias/${notice.slug}`}>
   <section
     class="relative w-full min-h-[60svh] pt-20 bg-[#00353d] overflow-hidden"
   >
