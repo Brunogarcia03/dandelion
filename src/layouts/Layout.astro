@@ -29,8 +29,6 @@ const DESCRIPTION =
     <link rel="preconnect" href="https://fonts.gstatic.com" />
     <link rel="preconnect" href="https://www.youtube.com" />
     <link rel="preconnect" href="https://www.youtube-nocookie.com" />
-    <link rel="preconnect" href="https://i.ytimg.com" />
-    <link rel="preconnect" href="https://unpkg.com" />
 
     <!-- Indexing -->
     <meta name="robots" content="index, follow" />
@@ -38,11 +36,6 @@ const DESCRIPTION =
     <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-
-    <!-- Performance -->
-    <link rel="preconnect" href="https://www.youtube.com" />
-    <link rel="preconnect" href="https://i.ytimg.com" />
-    <link rel="dns-prefetch" href="https://www.youtube.com" />
 
     <!-- Open Graph (Facebook / WhatsApp / LinkedIn) -->
     <meta property="og:type" content="website" />
@@ -68,7 +61,7 @@ const DESCRIPTION =
       Saltar al contenido principal
     </a>
 
-    <Header theme={theme} />
+    <Header theme={theme} client:load />
 
     <main id="main-content">
       <slot />
