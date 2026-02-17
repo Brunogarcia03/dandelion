@@ -10,7 +10,7 @@ import { videos } from "@/data/youtube-videos.json";
   >
     <div class="grid place-items-center w-full py-20">
       <h1
-        class="relative z-10 mx-auto max-w-4xl text-center text-xl font-bold text-black md:text-3xl lg:text-4xl"
+        class="relative z-10 mx-auto max-w-4xl text-center text-2xl font-bold text-black md:text-3xl lg:text-4xl"
       >
         Videos
       </h1>
@@ -21,7 +21,7 @@ import { videos } from "@/data/youtube-videos.json";
         las necesidades de su audiencia de manera temprana y frecuente.
       </p>
       <div
-        class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full max-w-7xl mt-10 px-[5vh]"
+        class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 w-full max-w-7xl mt-10 px-[2vh] sm:px-[5vh]"
       >
         {
           videos.map((v) => (
@@ -34,7 +34,7 @@ import { videos } from "@/data/youtube-videos.json";
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 referrerpolicy="strict-origin-when-cross-origin"
                 allowfullscreen=""
-                class="w-full rounded-lg aspect-video"
+                class="w-full rounded-lg aspect-video!"
               />
               <div class="transition duration-200 group-hover/bento:translate-x-2">
                 <>

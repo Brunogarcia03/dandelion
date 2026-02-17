@@ -73,23 +73,25 @@ const { Content } = await notice.render();
   </section>
 
   <!-- Article -->
-  <section class="relative py-16">
+  <section class="relative py-12 md:py-16">
     <article
-      class="content-article
-      prose prose-lg md:prose-xl
-      max-w-4xl mx-auto px-5
-      prose-p:my-3
-      prose-headings:mt-6 prose-headings:mb-3
-      prose-img:my-6
-      prose-blockquote:my-4
-      prose-hr:my-6
-      prose-blockquote:border-black/20
-      prose-img:rounded-xl
-      prose-img:max-w-xl
-      prose-img:shadow-xl
-      prose-img:shadow-white/30
-      prose-video:rounded-xl
-      prose-video:w-full"
+      class="content-article overflow-hidden
+    prose prose-lg md:prose-xl
+    max-w-4xl mx-auto px-5
+    prose-p:my-3
+    prose-headings:mt-6 prose-headings:mb-3
+    prose-img:my-6
+    prose-blockquote:my-4
+    prose-hr:my-6
+    prose-blockquote:border-black/20
+    prose-img:rounded-xl
+    prose-img:max-w-full
+    prose-img:w-full
+    prose-img:h-auto
+    prose-img:shadow-xl
+    prose-img:shadow-white/30
+    prose-video:rounded-xl
+    prose-video:w-full"
     >
       <Content />
     </article>

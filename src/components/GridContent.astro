@@ -213,17 +213,15 @@ const news = noticias
           href={`noticias/${noticia.slug}`}
           class="group/bento shadow-input row-span-1 flex flex-col justify-between space-y-4 rounded-xl border border-black/50 bg-black/10 p-4 transition duration-200 hover:shadow-xl [&>p:text-lg] card overflow-hidden md:col-span-1"
         >
-          <div class="min-h-[35vh] md:min-h-[20vh] w-full">
-            <div
-              class="flex flex-1 w-full h-full min-h-24 rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
-              style="background: linear-gradient(-45deg, rgb(0, 193, 149), rgb(13, 196, 154), rgb(0, 53, 61)) 99.9991% 50% / 400% 400%;"
-            >
-              <img
-                src={noticia.imagen}
-                alt={noticia.title}
-                class="aspect-video object-cover bg-[#00353d] rounded-lg"
-              />
-            </div>
+          <div
+            class="flex flex-1 w-full h-full rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
+            style="background: linear-gradient(-45deg, rgb(0, 193, 149), rgb(13, 196, 154), rgb(0, 53, 61)) 99.9991% 50% / 400% 400%;"
+          >
+            <img
+              src={noticia.imagen}
+              alt={noticia.title}
+              class="aspect-video w-full h-full object-cover rounded-lg"
+            />
           </div>
           <div class="transition duration-200 group-hover/bento:translate-x-2">
             <div class="flex items-center gap-2">
