@@ -83,7 +83,6 @@ export const GET: APIRoute = async ({ request }) => {
       videos: videosData.items.map((v: any) => ({
         id: v.id,
         title: v.snippet.title,
-        thumbnail: v.snippet.thumbnails.high.url,
         publishedAt: v.snippet.publishedAt,
         views: Number(v.statistics.viewCount || 0),
         likes: Number(v.statistics.likeCount || 0),
