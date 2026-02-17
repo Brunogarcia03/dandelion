@@ -33,22 +33,24 @@ import Logo from "@/assets/images/LOGO.jpg";
     <!-- PLAY -->
     <button
       id="radio-play"
+      aria-pressed="false"
+      aria-label="Reproducir radio"
       class="relative cursor-pointer w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#00c195] text-black flex items-center justify-center mr-4 hover:scale-105 transition animate-pulse"
     >
       <span class="icon-play absolute inset-0 flex items-center justify-center">
-        <Play />
+        <Play aria-hidden="true" />
       </span>
 
       <span
         class="icon-loading absolute inset-0 hidden items-center justify-center"
       >
-        <LoaderCircle class="animate-spin" />
+        <LoaderCircle class="animate-spin" aria-hidden="true" />
       </span>
 
       <span
         class="icon-pause absolute inset-0 flex items-center justify-center"
       >
-        <Pause />
+        <Pause aria-hidden="true" />
       </span>
     </button>
 
@@ -66,9 +68,9 @@ import Logo from "@/assets/images/LOGO.jpg";
 
   <!-- RIGHT -->
   <div class="flex items-center gap-4">
-    <button id="radio-mute" class="text-[#00c195]">
-      <span class="icon-vol"><Volume2 /></span>
-      <span class="icon-mute hidden"><VolumeX /></span>
+    <button id="radio-mute" aria-label="Silenciar radio" class="text-[#00c195]">
+      <span class="icon-vol"><Volume2 aria-hidden="true" /></span>
+      <span class="icon-mute hidden"><VolumeX aria-hidden="true" /></span>
     </button>
 
     <input
@@ -85,14 +87,15 @@ import Logo from "@/assets/images/LOGO.jpg";
   <!-- CHEVRON INSIDE -->
   <button
     id="radio-toggle"
+    aria-label="Mostrar u ocultar reproductor"
     class="absolute cursor-pointer right-4 -top-14 w-12 h-12 rounded-full bg-[#00c195] text-black flex items-center justify-center shadow-xl hover:scale-105 transition"
   >
     <span class="icon-up">
-      <ChevronUp />
+      <ChevronUp aria-hidden="true" />
     </span>
 
     <span class="icon-down hidden">
-      <ChevronDown />
+      <ChevronDown aria-hidden="true" />
     </span>
   </button>
 </aside>
@@ -134,10 +137,12 @@ import Logo from "@/assets/images/LOGO.jpg";
       if (!playing) {
         await audio.play();
         playing = true;
+
         loadingIcon.classList.remove("flex");
         loadingIcon.classList.add("hidden");
         playIcon.classList.add("hidden");
         pauseIcon.classList.remove("hidden");
+        playBtn.setAttribute("aria-pressed", playing);
         playBtn.classList.remove("animate-pulse");
       } else {
         audio.pause();
@@ -146,6 +151,7 @@ import Logo from "@/assets/images/LOGO.jpg";
         loadingIcon.classList.add("hidden");
         playIcon.classList.remove("hidden");
         pauseIcon.classList.add("hidden");
+        muteBtn.setAttribute("aria-pressed", audio.muted);
         playBtn.classList.add("animate-pulse");
       }
     } catch (err) {
@@ -171,6 +177,14 @@ import Logo from "@/assets/images/LOGO.jpg";
     collapsed = !collapsed;
 
     player.style.transform = collapsed ? "translateY(0%)" : "translateY(-100%)";
+    playBtn.setAttribute(
+      "aria-label",
+      playing ? "Pausar radio" : "Reproducir radio",
+    );
+    toggleBtn.setAttribute(
+      "aria-label",
+      collapsed ? "Expandir reproductor" : "Contraer reproductor",
+    );
 
     chevUp.classList.toggle("hidden", !collapsed);
     chevDown.classList.toggle("hidden", collapsed);

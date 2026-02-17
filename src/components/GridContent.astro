@@ -226,7 +226,6 @@ const news = noticias
               sizes="(max-width: 768px) 100vw, 33vw"
               format="webp"
               quality={65}
-              aria-placeholder="blur"
               class="aspect-video w-full h-full object-cover rounded-lg"
             />
           </div>
@@ -257,9 +256,15 @@ const news = noticias
             <a
               href={red.url}
               target="_blank"
-              class="group flex h-full will-change-transform w-1/5 rounded-2xl border border-black/50 bg-black/10 flex-col items-center justify-center p-2 $"
+              rel="noopener noreferrer"
+              class="group flex h-full will-change-transform w-1/5 rounded-2xl border border-black/50 bg-black/10 flex-col items-center justify-center p-2"
+              aria-label={`Ir a ${red.name}`}
             >
-              <img src={red.icon.src} class="w-5 sm:w-8 md:w-12" />
+              <img
+                src={red.icon.src}
+                alt={`Logo ${red.name}`}
+                class="w-5 sm:w-8 md:w-12"
+              />
 
               <p
                 class={`hidden sm:block border text-xs rounded-full px-2 py-0.5 mt-2 sm:mt-4 transition-all duration-300 ${colorClasses[red.color]} z-10`}

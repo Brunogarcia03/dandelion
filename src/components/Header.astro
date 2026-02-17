@@ -125,69 +125,89 @@ const { theme } = Astro.props;
 </header>
 
 <script>
-  import { gsap } from "gsap";
-
   function initMenu() {
     const button = document.getElementById("button-menu");
-    const menu = document.getElementById("mobile-menu");
     const overlay = document.getElementById("menu-overlay");
 
-    if (!button || !menu || !overlay) return;
+    if (!button || !overlay) return;
+
+    let gsap = null;
+    let tl = null;
+    let open = false;
+    let scrollPos = 0;
 
     const iconMenu = button.querySelector(".icon-menu");
     const iconClose = button.querySelector(".icon-close");
     const apoyanos = overlay.querySelector("#apoyanos");
     const links = overlay.querySelectorAll("#mobile-menu a");
 
-    let open = false;
-    let scrollPos = 0;
-
-    const tl = gsap.timeline({
-      paused: true,
-      defaults: {
-        ease: "power3.out",
-        duration: 0.6,
-      },
-
-      onStart: () => {
-        scrollPos = window.scrollY;
-
-        document.body.style.position = "fixed";
-        document.body.style.top = `-${scrollPos}px`;
-      },
-
-      onReverseComplete: () => {
-        document.body.style.position = "";
-        document.body.style.top = "";
-
-        window.scrollTo(0, scrollPos);
-        open = false;
-      },
+    // Estado inicial CSS-only (evita layout work inicial)
+    overlay.style.clipPath = "inset(0 0 0 100%)";
+    if (apoyanos) apoyanos.style.opacity = "0";
+    links.forEach((l) => {
+      l.style.transform = "translateY(40px)";
+      l.style.opacity = "0";
     });
 
-    gsap.set(overlay, { clipPath: "inset(0 0 0 100%)" });
-    gsap.set(apoyanos, { opacity: 0 });
-    gsap.set(links, { y: 40, opacity: 0 });
+    async function loadGSAP() {
+      if (gsap) return;
 
-    tl.to(overlay, {
-      clipPath: "inset(0 0 0 0%)",
-    })
-      .to(apoyanos, {
-        opacity: 1,
-        duration: 0.4,
-      })
-      .to(
-        links,
-        {
-          y: 0,
-          opacity: 1,
-          stagger: 0.05,
-          duration: 0.4,
+      const mod = await import("gsap");
+      gsap = mod.gsap || mod.default;
+
+      tl = gsap.timeline({
+        paused: true,
+        defaults: {
+          ease: "power3.out",
+          duration: 0.6,
         },
-        "<",
-      );
 
-    button.addEventListener("click", () => {
+        onStart: () => {
+          scrollPos = window.scrollY;
+
+          document.body.style.position = "fixed";
+          document.body.style.top = `-${scrollPos}px`;
+        },
+
+        onReverseComplete: () => {
+          document.body.style.position = "";
+          document.body.style.top = "";
+
+          window.scrollTo(0, scrollPos);
+          open = false;
+        },
+      });
+
+      gsap.set(overlay, { clipPath: "inset(0 0 0 100%)" });
+      gsap.set(apoyanos, { opacity: 0 });
+      gsap.set(links, { y: 40, opacity: 0 });
+
+      tl.to(overlay, {
+        clipPath: "inset(0 0 0 0%)",
+      })
+        .to(
+          apoyanos,
+          {
+            opacity: 1,
+            duration: 0.4,
+          },
+          "-=0.2",
+        )
+        .to(
+          links,
+          {
+            y: 0,
+            opacity: 1,
+            stagger: 0.05,
+            duration: 0.4,
+          },
+          "<",
+        );
+    }
+
+    button.addEventListener("click", async () => {
+      if (!gsap) await loadGSAP();
+
       open = !open;
 
       gsap.to(iconMenu, {
@@ -201,9 +221,15 @@ const { theme } = Astro.props;
         rotate: open ? 0 : 90,
         duration: 0.3,
       });
+
       open ? tl.play() : tl.reverse();
     });
   }
 
-  document.addEventListener("DOMContentLoaded", initMenu);
+  // Mejor que DOMContentLoaded para LCP
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", initMenu);
+  } else {
+    initMenu();
+  }
 </script>
