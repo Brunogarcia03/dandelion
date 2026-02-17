@@ -55,6 +55,7 @@ const colorClasses: any = {
 const videoID = "QXAcnnVMOk8";
 
 import stats from "@/data/youtube-stats.json";
+import Image from "astro/components/Image.astro";
 
 const noticias = await getCollection("noticias");
 const news = noticias
@@ -217,9 +218,15 @@ const news = noticias
             class="flex flex-1 w-full h-full rounded-lg bg-dot-black/[0.2] flex-col space-y-2"
             style="background: linear-gradient(-45deg, rgb(0, 193, 149), rgb(13, 196, 154), rgb(0, 53, 61)) 99.9991% 50% / 400% 400%;"
           >
-            <img
+            <Image
               src={noticia.imagen}
               alt={noticia.title}
+              width={480}
+              height={270}
+              sizes="(max-width: 768px) 100vw, 33vw"
+              format="webp"
+              quality={65}
+              aria-placeholder="blur"
               class="aspect-video w-full h-full object-cover rounded-lg"
             />
           </div>

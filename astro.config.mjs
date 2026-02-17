@@ -16,6 +16,10 @@ export default defineConfig({
     plugins: [tailwindcss()],
   },
 
+  image: {
+    domains: ["dandelion-rho.vercel.app"],
+  },
+
   integrations: [react(), markdoc(), keystatic()],
   adapter: vercel(),
 });

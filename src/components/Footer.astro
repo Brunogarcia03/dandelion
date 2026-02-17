@@ -6,6 +6,7 @@ import twitter from "@/assets/svgs/x.svg";
 import facebook from "@/assets/svgs/facebook-icon.svg";
 import tiktok from "@/assets/svgs/tiktok-icon-light.svg";
 import spotify from "@/assets/svgs/spotify.svg";
+import Image from "astro/components/Image.astro";
 
 const redes = [
   {
@@ -48,11 +49,16 @@ const redes = [
     <div class="flex items-center justify-between gap-y-1 w-full sm:w-auto">
       <!-- Logo -->
       <div class="flex items-center gap-x-2 sm:border-r sm:pr-4">
-        <img
-          class="hidden sm:block rounded-full size-10 md:size-12"
-          src={Logo.src}
+        <Image
+          src={Logo}
           alt="Logo Dándelion"
+          width={96}
+          height={96}
+          format="webp"
+          quality={80}
+          class="rounded-full border border-white w-12 h-12 md:w-16 md:h-16"
         />
+
         <a
           href="/"
           class="flex flex-col font-bold text-xl sm:text-3xl text-neutral-900"
