@@ -19,20 +19,22 @@ const { theme } = Astro.props;
   </head>
   <body class="relative w-screen overflow-x-hidden">
     <Header theme={theme} />
-    <slot />
+    <main id="main-content">
+      <slot />
+    </main>
     <Footer />
   </body>
+
+  <style>
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      height: 100%;
+    }
+
+    * {
+      @apply select-none;
+    }
+  </style>
 </html>
-
-<style>
-  html,
-  body {
-    margin: 0;
-    width: 100%;
-    height: 100%;
-  }
-
-  * {
-    @apply select-none;
-  }
-</style>
