@@ -52,8 +52,6 @@ const colorClasses: any = {
   green: "border-black group-hover:bg-green-700 group-hover:text-white",
 };
 
-const videoID = "QXAcnnVMOk8";
-
 import stats from "@/data/youtube-stats.json";
 import Image from "astro/components/Image.astro";
 
@@ -90,12 +88,14 @@ const news = noticias
       <iframe
         width="560"
         height="315"
-        src={`https://www.youtube.com/embed/${videoID}?si=xCBJdlJF7CegvYnf`}
+        src="https://www.youtube-nocookie.com/embed/wrOAz_bYgHI"
+        class="w-full rounded-lg"
         title="YouTube video player"
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-        referrerpolicy="strict-origin-when-cross-origin"
-        allowfullscreen=""
-        class="w-full rounded-lg"></iframe>
+        frameborder="0"
+        loading="lazy"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe>
+
       <div class="transition duration-200 group-hover/bento:translate-x-2">
         <div class="flex items-center gap-2">
           <svg

@@ -5,23 +5,68 @@ import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 
 const { theme } = Astro.props;
+
+const SITE_NAME = "Dándelion FM 98.5";
+const SITE_URL = "https://dandelion-rho.vercel.app";
+const DESCRIPTION =
+  "Dándelion FM 98.5 - Radio en vivo desde Alberti. Noticias, música, streaming y contenido multimedia.";
 ---
 
 <!doctype html>
 <html lang="es">
   <head>
+    <!-- Base -->
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary SEO -->
+    <title>Dándelion FM 98.5 | Radio en vivo desde Alberti</title>
+    <meta name="description" content={DESCRIPTION} />
+    <link rel="canonical" href={SITE_URL} />
+
+    <!-- Indexing -->
+    <meta name="robots" content="index, follow" />
+
+    <!-- Favicons -->
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <link rel="icon" href="/favicon.ico" />
-    <meta name="generator" content={Astro.generator} />
-    <title>Dándelion web | FM 98.5</title>
+
+    <!-- Performance -->
+    <link rel="preconnect" href="https://www.youtube.com" />
+    <link rel="preconnect" href="https://i.ytimg.com" />
+    <link rel="dns-prefetch" href="https://www.youtube.com" />
+
+    <!-- Open Graph (Facebook / WhatsApp / LinkedIn) -->
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content="Dándelion FM 98.5" />
+    <meta property="og:description" content={DESCRIPTION} />
+    <meta property="og:url" content={SITE_URL} />
+    <meta property="og:image" content={`${SITE_URL}/og-image.jpg`} />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Dándelion FM 98.5" />
+    <meta name="twitter:description" content={DESCRIPTION} />
+    <meta name="twitter:image" content={`${SITE_URL}/og-image.jpg`} />
+
+    <!-- Theme color (Mobile UI SEO bonus) -->
+    <meta name="theme-color" content="#00c195" />
   </head>
+
   <body class="relative w-screen overflow-x-hidden">
+    <!-- Skip Link SEO + Accesibilidad -->
+    <a href="#main-content" class="sr-only focus:not-sr-only">
+      Saltar al contenido principal
+    </a>
+
     <Header theme={theme} />
+
     <main id="main-content">
       <slot />
     </main>
+
     <Footer />
   </body>
 
