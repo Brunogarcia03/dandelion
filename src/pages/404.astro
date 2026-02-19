@@ -1,0 +1,35 @@
+---
+import Button from "@/components/ui/Button.astro";
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout>
+  <section
+    class="w-full h-full lg:h-[calc(100vh-128px)] pt-20 py-5 bg-[#00353d] overflow-hidden"
+  >
+    <div
+      class="grid max-w-7xl mx-auto h-full place-content-center text-center pt-20"
+    >
+      <h1
+        class="relative z-10 mx-auto max-w-5xl text-center text-xl backdrop-blur-sm font-bold text-white md:text-7xl lg:text-8xl -mt-16"
+      >
+        404
+      </h1>
+      <p class="mb-4 text-3xl tracking-tight font-bold md:text-4xl text-white">
+        Uppppppssss!!!!
+      </p>
+      <p
+        class="relative z-10 mx-auto max-w-xl text-center text-lg font-normal text-white"
+      >
+        Lo sentimos, no encontramos esa página. Encontrarás mucho que explorar
+        en la página de inicio.
+      </p>
+      <a
+        href="/"
+        class="inline-flex items-center justify-center text-white bg-primary-600 hover:bg-primary-800 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:focus:ring-primary-900 my-4"
+      >
+        <Button class="h-11 w-full max-w-sm bg-[#00c195]">Inicio</Button>
+      </a>
+    </div>
+  </section>
+</Layout>

@@ -1,106 +1,105 @@
 ---
 const STREAM = "https://server6.hostradios.com/8022/stream";
 
-import {
-  Play,
-  Pause,
-  LoaderCircle,
-  Volume2,
-  VolumeX,
-  ChevronUp,
-  ChevronDown,
-} from "@lucide/astro";
+import { Play, Pause, LoaderCircle, Volume2, VolumeX } from "@lucide/astro";
 
 import Logo from "@/assets/images/LOGO.jpg";
 ---
 
-<aside
-  id="radio-player"
-  class="fixed bottom-0 left-0 w-full bg-[#0a0a0a] border-t max-w-screen border-white/10 px-6 py-4 flex items-center justify-between transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] translate-y-full z-100"
+<section
+  class="w-full bg-white pt-16 md:py-16 px-5 flex flex-col items-center justify-center"
 >
-  <!-- LEFT -->
-  <div class="flex items-center">
-    <!-- THUMB -->
-    <div
-      class="hidden md:block
+  <h6
+    class="text-[#00c195] mb-2 md:mb-4 text-lg md:text-xl font-bold uppercase undefined"
+  >
+    Radio Dándelion
+  </h6>
+  <h3 class="text-2xl md:text-5xl max-w-xl text-center font-semibold undefined">
+    ¡Escucha nuestra radio!
+  </h3>
+  <aside
+    id="radio-player"
+    class="bottom-0 left-0 mt-8 mx-[5vh] border-t w-full md:max-w-3xl md:mx-auto rounded-xl border border-black/50 text-black bg-black/10 p-4 transition duration-200 hover:shadow-xl [&>p:text-lg] card overflow-hidden flex items-center justify-between ease-[cubic-bezier(0.22,1,0.36,1)] z-100"
+  >
+    <!-- LEFT -->
+    <div class="flex items-center">
+      <!-- THUMB -->
+      <div
+        class="hidden md:block
       w-14 h-14 rounded-full
       border-2 border-[#00c195]
       overflow-hidden mr-4"
-    >
-      <img src={Logo.src} alt="Radio Logo" class="w-full h-full object-cover" />
+      >
+        <img
+          src={Logo.src}
+          alt="Radio Logo"
+          class="w-full h-full object-cover"
+        />
+      </div>
+
+      <!-- PLAY -->
+      <button
+        id="radio-play"
+        aria-pressed="false"
+        aria-label="Reproducir radio"
+        class="relative cursor-pointer w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#00c195] text-black flex items-center justify-center mr-2 sm:mr-4 hover:scale-105 transition animate-pulse"
+      >
+        <span
+          class="icon-play absolute inset-0 flex items-center justify-center"
+        >
+          <Play aria-hidden="true" />
+        </span>
+
+        <span
+          class="icon-loading absolute inset-0 hidden items-center justify-center"
+        >
+          <LoaderCircle class="animate-spin" aria-hidden="true" />
+        </span>
+
+        <span
+          class="icon-pause absolute inset-0 flex items-center justify-center"
+        >
+          <Pause aria-hidden="true" />
+        </span>
+      </button>
+
+      <!-- DATA -->
+      <div>
+        <h2 class="text-black text-lg font-semibold flex items-center">
+          Dándelion
+          <span class="mx-2 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
+          Aire
+        </h2>
+
+        <p class="text-xs text-black/60">Radio FM 98.5 - Alberti</p>
+      </div>
     </div>
 
-    <!-- PLAY -->
-    <button
-      id="radio-play"
-      aria-pressed="false"
-      aria-label="Reproducir radio"
-      class="relative cursor-pointer w-12 h-12 sm:w-14 sm:h-14 rounded-full bg-[#00c195] text-black flex items-center justify-center mr-4 hover:scale-105 transition animate-pulse"
-    >
-      <span class="icon-play absolute inset-0 flex items-center justify-center">
-        <Play aria-hidden="true" />
-      </span>
-
-      <span
-        class="icon-loading absolute inset-0 hidden items-center justify-center"
+    <!-- RIGHT -->
+    <div class="flex items-center gap-4">
+      <button
+        id="radio-mute"
+        aria-label="Silenciar radio"
+        class="text-[#00c195]"
       >
-        <LoaderCircle class="animate-spin" aria-hidden="true" />
-      </span>
+        <span class="icon-vol"><Volume2 aria-hidden="true" /></span>
+        <span class="icon-mute hidden"><VolumeX aria-hidden="true" /></span>
+      </button>
 
-      <span
-        class="icon-pause absolute inset-0 flex items-center justify-center"
-      >
-        <Pause aria-hidden="true" />
-      </span>
-    </button>
+      <label for="radio-volume" class="sr-only"> Volumen de la radio </label>
 
-    <!-- DATA -->
-    <div>
-      <h2 class="text-white text-lg font-semibold flex items-center">
-        Dándelion
-        <span class="mx-2 w-1.5 h-1.5 bg-red-500 rounded-full"></span>
-        Aire
-      </h2>
-
-      <p class="text-xs text-white/60">Radio FM 98.5 - Alberti</p>
+      <input
+        id="radio-volume"
+        type="range"
+        min="0"
+        max="1"
+        step="0.01"
+        value="1"
+        class="w-40 accent-[#00c195] hidden md:block"
+      />
     </div>
-  </div>
-
-  <!-- RIGHT -->
-  <div class="flex items-center gap-4">
-    <button id="radio-mute" aria-label="Silenciar radio" class="text-[#00c195]">
-      <span class="icon-vol"><Volume2 aria-hidden="true" /></span>
-      <span class="icon-mute hidden"><VolumeX aria-hidden="true" /></span>
-    </button>
-
-    <label for="radio-volume" class="sr-only"> Volumen de la radio </label>
-
-    <input
-      id="radio-volume"
-      type="range"
-      min="0"
-      max="1"
-      step="0.01"
-      value="1"
-      class="w-40 accent-[#00c195] hidden md:block"
-    />
-  </div>
-
-  <!-- CHEVRON INSIDE -->
-  <button
-    id="radio-toggle"
-    aria-label="Mostrar u ocultar reproductor"
-    class="absolute cursor-pointer right-4 -top-14 w-12 h-12 rounded-full bg-[#00c195] text-black flex items-center justify-center shadow-xl hover:scale-105 transition"
-  >
-    <span class="icon-up">
-      <ChevronUp aria-hidden="true" />
-    </span>
-
-    <span class="icon-down hidden">
-      <ChevronDown aria-hidden="true" />
-    </span>
-  </button>
-</aside>
+  </aside>
+</section>
 
 <audio id="radio-audio" src={STREAM} preload="none"></audio>
 
@@ -111,9 +110,6 @@ import Logo from "@/assets/images/LOGO.jpg";
   const muteBtn = document.getElementById("radio-mute");
   const volumeSlider = document.getElementById("radio-volume");
 
-  const toggleBtn = document.getElementById("radio-toggle");
-  const player = document.getElementById("radio-player");
-
   const playIcon = playBtn.querySelector(".icon-play");
   const loadingIcon = playBtn.querySelector(".icon-loading");
   const pauseIcon = playBtn.querySelector(".icon-pause");
@@ -122,11 +118,7 @@ import Logo from "@/assets/images/LOGO.jpg";
   const volIcon = muteBtn.querySelector(".icon-vol");
   const muteIcon = muteBtn.querySelector(".icon-mute");
 
-  const chevUp = toggleBtn.querySelector(".icon-up");
-  const chevDown = toggleBtn.querySelector(".icon-down");
-
   let playing = false;
-  let collapsed = true;
 
   /* PLAY */
   playBtn.addEventListener("click", async () => {
@@ -172,23 +164,5 @@ import Logo from "@/assets/images/LOGO.jpg";
 
     volIcon.classList.toggle("hidden", audio.muted);
     muteIcon.classList.toggle("hidden", !audio.muted);
-  });
-
-  /* COLLAPSE */
-  toggleBtn.addEventListener("click", () => {
-    collapsed = !collapsed;
-
-    player.style.transform = collapsed ? "translateY(0%)" : "translateY(-100%)";
-    playBtn.setAttribute(
-      "aria-label",
-      playing ? "Pausar radio" : "Reproducir radio",
-    );
-    toggleBtn.setAttribute(
-      "aria-label",
-      collapsed ? "Expandir reproductor" : "Contraer reproductor",
-    );
-
-    chevUp.classList.toggle("hidden", !collapsed);
-    chevDown.classList.toggle("hidden", collapsed);
   });
 </script>
