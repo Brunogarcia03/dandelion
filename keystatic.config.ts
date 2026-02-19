@@ -1,6 +1,10 @@
 import { config, fields, collection } from "@keystatic/core";
 
 export default config({
+  ui: {
+    brand: { name: "Dándelion FM 98.5" },
+  },
+
   storage: {
     kind: "github",
     repo: {
